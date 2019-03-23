@@ -10,10 +10,7 @@ function parseFlags()
 
 		if (line.search("-") == -1 && flags.length != 0)
 		{
-			flags[flags.length-1][1] 
-= 
-flags[flags.length-1][1].concat(line.replace(/\s\s+/g, 
-" ").replace(/\r/g, "").replace(".", ""));
+			flags[flags.length-1][1] = flags[flags.length-1][1].concat(line.replace(/\s\s+/g, " ").replace(/\r/g, "").replace(".", ""));
 			continue;
 		}
 
@@ -54,7 +51,7 @@ function categorizeFlags()
 	catFlags["generic"] = [];
 	catFlags["recursive"] = [];
 	catFlags["loop"] = [];
-	catFlags["c string"] = [];
+	catFlags["string"] = [];
 
 	for (let i = 0; i < flags.length; i++)
 	{
@@ -66,9 +63,9 @@ function categorizeFlags()
 		{
 			catFlags["recursive"].push(flags[i]);
 		}
-		else if (flags[i][1].search("c string") != -1)
+		else if (flags[i][1].search("string") != -1)
 		{
-			catFlags["c string"].push(flags[i]);
+			catFlags["string"].push(flags[i]);
 		}
 		else
 		{
@@ -93,28 +90,23 @@ function printCatFlags()
 }
 
 const { exec } = require('child_process');
-exec('cat flags.txt', (err, stdout, stderr) =>
-{
-	if (err)
-	{
-		console.log("Node couldn't execute the command!");
-		return;
-	}
-	else
+exec('type flags.txt', (err, stdout, stderr) =>
+{	
+	if (!err)
 	{
 		lines = stdout.split("\n");
 		parseFlags();
 
-/*		for (let i = 0; i < flags.length && i < 5; i++)
-		{
-			console.log(flags[i]);
-		}
-*/
 		categorizeFlags();
 
 		printCatFlags();
+	
 	}
-
+	else
+	{
+		console.log("Node couldn't execute the command!");
+		return;
+	}
 });
 
 
