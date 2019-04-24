@@ -183,46 +183,26 @@ function categorizeFlags()
 
 	for (let i = 0; i < flags.length; i++)
 	{
-		if (searchKeyword(flags[i], "loop"))
-		{
+		if (searchKeyword(flags[i], "loop")) // Unrolls loops 
 			catFlags["loop"].push(flags[i]);
-		}
-		else if (searchKeyword(flags[i], "math"))
-		{
+		else if (searchKeyword(flags[i], "math")) // Optimizes math functions like cos and tan
 			catFlags["math"].push(flags[i]);
-		}
-		else if (searchKeyword(flags[i], "recurs"))
-		{
+		else if (searchKeyword(flags[i], "recurs")) // onrolls recursive functions
 			catFlags["recursive"].push(flags[i]);
-		}
-		else if (searchKeyword(flags[i], "string"))
-		{
+		else if (searchKeyword(flags[i], "string")) // Optimizes strcat, strlen and strcpy functions
 			catFlags["string"].push(flags[i]);
-		}
-		else if (searchKeyword(flags[i], "float"))
-		{
+		else if (searchKeyword(flags[i], "float")) // Regards operations with IEEE floating-point numbers 
 			catFlags["float"].push(flags[i]);
-		}
 		else if (searchKeyword(flags[i], "IRA"))
-		{
 			catFlags["IRA"].push(flags[i]);
-		}
 		else if (searchKeyword(flags[i], "scheduler"))
-		{
 			catFlags["scheduler"].push(flags[i]);
-		}
-		else if (searchKeyword(flags[i], "CSE") || searchKeyword(flags[i], "common subexpression elimination") )
-		{
+		else if (searchKeyword(flags[i], "CSE") || searchKeyword(flags[i], "common subexpression elimination") ) // Substitutes expressions in the code that are called several times and binds them to a variable
 			catFlags["CSE"].push(flags[i]);
-		}
 		else if (O1.includes(flags[i][0]) || O2.includes(flags[i][0]) || O3.includes(flags[i][0]))
-		{
 			catFlags["generic"].push(flags[i]);
-		}
 		else
-		{
 			flags.splice(i, 1);
-		}
 	}
 }
 
