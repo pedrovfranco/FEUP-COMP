@@ -2462,6 +2462,11 @@ int main()
 	std::cout.precision(6);
 	auto begin = std::chrono::high_resolution_clock::now();
 
+	int maxRuns = 10;
+	for (int executionCounter = 0; executionCounter < maxRuns; executionCounter++)
+	{
+	
+
 	//-----------------------------------PROBLEM 1----------------------------------------
 
 	/*int sum = 0;
@@ -2569,24 +2574,22 @@ int main()
 
 	//-----------------------------------PROBLEM 8----------------------------------------
 
-	
 	// string input = "7316717653133062491922511967442657474235534919493496983520312774506326239578318016984801869478851843858615607891129494954595017379583319528532088055111254069874715852386305071569329096329522744304355766896648950445244523161731856403098711121722383113622298934233803081353362766142828064444866452387493035890729629049156044077239071381051585930796086670172427121883998797908792274921901699720888093776657273330010533678812202354218097512545405947522435258490771167055601360483958644670632441572215539753697817977846174064955149290862569321978468622482839722413756570560574902614079729686524145351004748216637048440319989000889524345065854122758866688116427171479924442928230863465674813919123162824586178664583591245665294765456828489128831426076900422421902267105562632111110937054421750694165896040807198403850962455444362981230987879927244284909188845801561660979191338754992005240636899125607176060588611646710940507754100225698315520005593572972571636269561882670428252483600823257530420752963450";
-	
+
 	// long long cont = 1,max =0;
-	
+
 	// for ( int i = 0; i < input.length()-13 ; i++)
 	// {
 	// 	for (int j = i; j < i + 13 ; j++)
 	// 	{
 	// 		cont *= stoi(input.substr(j,1));
 	// 	}
-	
+
 	// 	if (cont > max)	max = cont;
-	
+
 	// 	cont = 1;
 	// }
-	
-	
+
 	// cout << max;
 
 	//-----------------------------------PROBLEM 9----------------------------------------
@@ -2612,13 +2615,13 @@ int main()
 	//-----------------------------------PROBLEM 10----------------------------------------
 
 	// long long sum=0;
-	
+
 	// for (int i = 2; i <= 2000000; i++)
 	// {
 	// 	if (if_primo(i))
 	// 	sum += i;
 	// }
-	
+
 	// cout << sum;
 
 	//-----------------------------------PROBLEM 11----------------------------------------
@@ -2718,7 +2721,6 @@ int main()
 
 	//-----------------------------------PROBLEM 12----------------------------------------
 
-	
 	// for (int i = 1; ; i++)
 	// {
 	// 	int temp = somanprimeiros2(i);
@@ -2730,7 +2732,6 @@ int main()
 	// }
 
 	//-----------------------------------PROBLEM 13----------------------------------------
-
 
 	//
 	//ifstream file("c:/problem13.txt");
@@ -2782,15 +2783,14 @@ int main()
 
 	//-----------------------------------PROBLEM 16----------------------------------------
 
-	
 	// string res = bigpower(to_string(2), 1000);
 	// int conta = 0;
-	
+
 	// for (int i = 0; i < res.length(); i++)
 	// {
 	// 	conta += stoi(res.substr(i, 1));
 	// }
-	
+
 	// cout << conta;
 
 	//-----------------------------------PROBLEM 18----------------------------------------
@@ -2812,7 +2812,6 @@ int main()
 	// input.push_back({91, 71, 52, 38, 17, 14, 91, 43, 58, 50, 27, 29, 48});
 	// input.push_back({63, 66, 4, 68, 89, 53, 67, 30, 73, 16, 69, 87, 40, 31});
 	// input.push_back({4, 62, 98, 27, 23, 9, 70, 98, 73, 93, 38, 53, 60, 4, 23});
-
 
 	// std::cout << problem18(input);
 
@@ -2873,13 +2872,13 @@ int main()
 	//std::cout << count;
 
 	//-----------------------------------PROBLEM 24----------------------------------------
-/*
+	/*
 	std::vector<long long> res = longNewNumPerms({ 0,1,2,3,4,5,6,7,8,9 });
 
 	std::cout << res[1000000 - 1];
 
 */
-/*int myints[] = {0,1,2,3,4,5,6,7,8,9};
+	/*int myints[] = {0,1,2,3,4,5,6,7,8,9};
 
 for (int i = 0; i < 1000000; ++i)
 {
@@ -2891,67 +2890,67 @@ for (int i = 0; i < 10; ++i)
 	std::cout << myints[i];
 }
 */
-//-----------------------------------PROBLEM 25----------------------------------------
+	//-----------------------------------PROBLEM 25----------------------------------------
 
-//std::vector<std::string> res = { 2,std::to_string(1) };
+	//std::vector<std::string> res = { 2,std::to_string(1) };
 
-//long long i = 1;
+	//long long i = 1;
 
-//while (res[i].length() < 1000)
-//{
-//	i++;
+	//while (res[i].length() < 1000)
+	//{
+	//	i++;
 
-//	res.push_back(bigadd(res[i - 1], res[i - 2]));
+	//	res.push_back(bigadd(res[i - 1], res[i - 2]));
 
-//}
+	//}
 
-//std::cout << i + 1;
+	//std::cout << i + 1;
 
-//-----------------------------------PROBLEM 27----------------------------------------
+	//-----------------------------------PROBLEM 27----------------------------------------
 
-//int max = 0;
-//int amax = 0;
-//int bmax = 0;
+	//int max = 0;
+	//int amax = 0;
+	//int bmax = 0;
 
-//for (int a = -999; a < 1000; a++)                             // n^2 + a*n + b é a função que retorna os valores primos consecutivos começando em n = 0.
-//{
+	//for (int a = -999; a < 1000; a++)                             // n^2 + a*n + b é a função que retorna os valores primos consecutivos começando em n = 0.
+	//{
 
-//	for (int b = 0; b < 1000; b++)
-//	{
+	//	for (int b = 0; b < 1000; b++)
+	//	{
 
-//		if (if_primo(b))
-//		{
+	//		if (if_primo(b))
+	//		{
 
-//			int j = 1;
+	//			int j = 1;
 
-//			while (if_primo(pow(j, 2) + j*a + b))
-//			{
-//				j++;
-//			}
+	//			while (if_primo(pow(j, 2) + j*a + b))
+	//			{
+	//				j++;
+	//			}
 
-//			if (j > max)
-//			{
-//				max = j;
-//				amax = a;
-//				bmax = b;
-//			}
+	//			if (j > max)
+	//			{
+	//				max = j;
+	//				amax = a;
+	//				bmax = b;
+	//			}
 
-//		}
+	//		}
 
-//	}
+	//	}
 
-//}
+	//}
 
-//cout << "n^2 + " << amax << "n + " << bmax << " | " << max << endl;
-//cout << "Resultado: " << amax*bmax;
+	//cout << "n^2 + " << amax << "n + " << bmax << " | " << max << endl;
+	//cout << "Resultado: " << amax*bmax;
 
-//-----------------------------------PROBLEM 28---------------------------------------
+	//-----------------------------------PROBLEM 28---------------------------------------
 
-//cout << problem28(1001001);
+	//cout << problem28(1001001);
 
-//-----------------------------------PROBLEM 29---------------------------------------
+	//-----------------------------------PROBLEM 29---------------------------------------
 
-/*vector<double> res;
+	/*vector<double> res;
 
 
 for (int a = 2; a <= 100; a++)
@@ -2982,112 +2981,112 @@ res.erase(res.begin() + j);
 
 cout << res.size();*/
 
-//-----------------------------------PROBLEM 32---------------------------------------
+	//-----------------------------------PROBLEM 32---------------------------------------
 
-//long long sum = 0;
-//std::string workstr;
-//long long lastnumber = 0;
+	//long long sum = 0;
+	//std::string workstr;
+	//long long lastnumber = 0;
 
-//for (int i = 1; i < 100000; i++)
-//{
+	//for (int i = 1; i < 100000; i++)
+	//{
 
-//	for (int j = 0; j < (divisores(i).size() / 2); j++)
-//	{
-//		workstr = "";
-//		workstr += std::to_string(divisores(i)[j]);
-//		workstr += (std::to_string(i / divisores(i)[j]));
-//		workstr += (std::to_string(i));
+	//	for (int j = 0; j < (divisores(i).size() / 2); j++)
+	//	{
+	//		workstr = "";
+	//		workstr += std::to_string(divisores(i)[j]);
+	//		workstr += (std::to_string(i / divisores(i)[j]));
+	//		workstr += (std::to_string(i));
 
-//		if ((workstr.length() == 9) && (if_pandigital(workstr)))
-//		{
-//			if (lastnumber != i)
-//			{
-//				lastnumber = i;
-//				sum += i;
-//			}
+	//		if ((workstr.length() == 9) && (if_pandigital(workstr)))
+	//		{
+	//			if (lastnumber != i)
+	//			{
+	//				lastnumber = i;
+	//				sum += i;
+	//			}
 
-//			else
-//			{
-//				lastnumber = i;
-//				break;
-//			}
+	//			else
+	//			{
+	//				lastnumber = i;
+	//				break;
+	//			}
 
-//		}
+	//		}
 
-//	}
+	//	}
 
-//}
+	//}
 
-//std::cout << sum;
+	//std::cout << sum;
 
-//-----------------------------------PROBLEM 33---------------------------------------
+	//-----------------------------------PROBLEM 33---------------------------------------
 
-//std::vector<int> num;
-//std::vector<int> den;
+	//std::vector<int> num;
+	//std::vector<int> den;
 
-//std::string workstr1;
-//std::string workstr2;
+	//std::string workstr1;
+	//std::string workstr2;
 
-//for (int i = 11; i < 100; i++)  //Iterador do numerador
-//{
+	//for (int i = 11; i < 100; i++)  //Iterador do numerador
+	//{
 
-//	for (int j = i + 1; j < 100; j++)  //Iterador do denominador
-//	{
+	//	for (int j = i + 1; j < 100; j++)  //Iterador do denominador
+	//	{
 
-//		workstr1 = std::to_string(i);
-//		workstr2 = std::to_string(j);
+	//		workstr1 = std::to_string(i);
+	//		workstr2 = std::to_string(j);
 
-//		if (workstr1.substr(1) == "0" && workstr2.substr(1) == "0")
-//		{
-//			continue;
-//		}
+	//		if (workstr1.substr(1) == "0" && workstr2.substr(1) == "0")
+	//		{
+	//			continue;
+	//		}
 
-//		for (int a = 0; a < 2; a++)
-//		{
+	//		for (int a = 0; a < 2; a++)
+	//		{
 
-//			for (int b = 0; b < 2; b++)
-//			{
-//				if (workstr1.substr(a,1) == workstr2.substr(b, 1))
-//				{
+	//			for (int b = 0; b < 2; b++)
+	//			{
+	//				if (workstr1.substr(a,1) == workstr2.substr(b, 1))
+	//				{
 
-//					std::string workstr3 = workstr1;
-//					std::string workstr4 = workstr2;
+	//					std::string workstr3 = workstr1;
+	//					std::string workstr4 = workstr2;
 
-//					workstr3.erase(a, 1);
-//					workstr4.erase(b, 1);
+	//					workstr3.erase(a, 1);
+	//					workstr4.erase(b, 1);
 
-//					if ((double)stoi(workstr3) / stoi(workstr4) == (double)i / j)
-//					{
-//						num.push_back(stoi(workstr3));
-//						den.push_back(stoi(workstr4));
-//					}
+	//					if ((double)stoi(workstr3) / stoi(workstr4) == (double)i / j)
+	//					{
+	//						num.push_back(stoi(workstr3));
+	//						den.push_back(stoi(workstr4));
+	//					}
 
-//				}
-//			}
+	//				}
+	//			}
 
-//		}
-//
+	//		}
+	//
 
-//	}
+	//	}
 
-//}
+	//}
 
-//int num1 = 1;
-//int num2 = 1;
+	//int num1 = 1;
+	//int num2 = 1;
 
-//for (int i = 0; i < 4; i++)
-//{
-//	num1 *= num[i];
-//}
+	//for (int i = 0; i < 4; i++)
+	//{
+	//	num1 *= num[i];
+	//}
 
-//for (int i = 0; i < 4; i++)
-//{
-//	num2 *= den[i];
-//}
+	//for (int i = 0; i < 4; i++)
+	//{
+	//	num2 *= den[i];
+	//}
 
-//-----------------------------------PROBLEM 35---------------------------------------
+	//-----------------------------------PROBLEM 35---------------------------------------
 
-/*bool flag;
+	/*bool flag;
 
 int count = 0;
 
@@ -3117,79 +3116,78 @@ for (int i = 0; i < primes.size(); ++i)
 
 std::cout << count;*/
 
-//std::vector<int> test = problem35(12345);
+	//std::vector<int> test = problem35(12345);
 
+	//-----------------------------------PROBLEM 36---------------------------------------
 
-//-----------------------------------PROBLEM 36---------------------------------------
+	//std::string workstr;
+	//long long sum = 0;
 
-//std::string workstr;
-//long long sum = 0;
+	//for (long long i = 1; i < 1000000; i++)
+	//{
 
-//for (long long i = 1; i < 1000000; i++)
-//{
+	//	workstr = std::bitset<32>(i).to_string();
 
-//	workstr = std::bitset<32>(i).to_string();
+	//	workstr = workstr.substr(workstr.find_first_of("1"));
 
-//	workstr = workstr.substr(workstr.find_first_of("1"));
+	//	if (if_palindrome(i) && if_palindrome(workstr))
+	//	{
+	//		sum += i;
+	//	}
 
-//	if (if_palindrome(i) && if_palindrome(workstr))
-//	{
-//		sum += i;
-//	}
+	//}
 
-//}
+	//std::cout << sum;
 
-//std::cout << sum;
+	//-----------------------------------PROBLEM 38---------------------------------------
 
-//-----------------------------------PROBLEM 38---------------------------------------
+	//for (int i = 5; i <= 9327 ; i++)
+	//{
+	//	if (problem38(i)!="")
+	//	{
+	//		std::cout << problem38(i) << std::endl;
+	//	}
+	//}
 
-//for (int i = 5; i <= 9327 ; i++)
-//{
-//	if (problem38(i)!="")
-//	{
-//		std::cout << problem38(i) << std::endl;
-//	}
-//}
+	//-----------------------------------PROBLEM 39---------------------------------------
 
-//-----------------------------------PROBLEM 39---------------------------------------
+	//int max = 0;
+	//int place;
+	//
+	//for (int i = 10; i <= 1000 ; i++)
+	//{
+	//	if (numerodesolucoesproblem39(i) > max)
+	//	{
+	//		max = numerodesolucoesproblem39(i);
+	//		place = i;
+	//	}
+	//}
+	//
+	//cout << place
 
-//int max = 0;
-//int place;
-//
-//for (int i = 10; i <= 1000 ; i++)
-//{
-//	if (numerodesolucoesproblem39(i) > max)
-//	{
-//		max = numerodesolucoesproblem39(i);
-//		place = i;
-//	}
-//}
-//
-//cout << place
+	//-----------------------------------PROBLEM 40---------------------------------------
 
-//-----------------------------------PROBLEM 40---------------------------------------
+	//std::string constant = "0.";
 
-//std::string constant = "0.";
+	//for (int i = 1; constant.length() < 1000005; i++)
+	//{
+	//	constant += std::to_string(i);
+	//}
 
-//for (int i = 1; constant.length() < 1000005; i++)
-//{
-//	constant += std::to_string(i);
-//}
+	//std::string multi = "1";
 
-//std::string multi = "1";
+	//multi = bigmultiply(multi, stoi(constant.substr(11,1)));
+	//multi = bigmultiply(multi, stoi(constant.substr(101, 1)));
+	//multi = bigmultiply(multi, stoi(constant.substr(1001, 1)));
+	//multi = bigmultiply(multi, stoi(constant.substr(10001, 1)));
+	//multi = bigmultiply(multi, stoi(constant.substr(100001, 1)));
+	//multi = bigmultiply(multi, stoi(constant.substr(1000001, 1)));
 
-//multi = bigmultiply(multi, stoi(constant.substr(11,1)));
-//multi = bigmultiply(multi, stoi(constant.substr(101, 1)));
-//multi = bigmultiply(multi, stoi(constant.substr(1001, 1)));
-//multi = bigmultiply(multi, stoi(constant.substr(10001, 1)));
-//multi = bigmultiply(multi, stoi(constant.substr(100001, 1)));
-//multi = bigmultiply(multi, stoi(constant.substr(1000001, 1)));
+	//std::cout << multi;
 
-//std::cout << multi;
+	//-----------------------------------PROBLEM 41---------------------------------------
 
-//-----------------------------------PROBLEM 41---------------------------------------
-
-/*long long max = 0;
+	/*long long max = 0;
 
 std::vector<long long> primos = SieveOfEratosthenes(999999999);
 
@@ -3204,106 +3202,106 @@ break;
 
 }*/
 
-//-----------------------------------PROBLEM 42---------------------------------------
+	//-----------------------------------PROBLEM 42---------------------------------------
 
-//ifstream file("c:/problem42.txt");
+	//ifstream file("c:/problem42.txt");
 
-//string input;
+	//string input;
 
-//file >> input;
+	//file >> input;
 
-//int a1 = 0;
-//int a2 = 0;
-//int b = -1;
-//long long sum = 0;
+	//int a1 = 0;
+	//int a2 = 0;
+	//int b = -1;
+	//long long sum = 0;
 
-//vector<string> words;
+	//vector<string> words;
 
-//for (int i = 0; i < input.length(); i++)
-//{
+	//for (int i = 0; i < input.length(); i++)
+	//{
 
-//	if (input.substr(i, 1) == ",")
-//	{
-//		b++;
-//		a1 = a2;
-//		a2 = i + 1;
-//		words.push_back(input.substr(a1 + 1, a2 - a1 - 3));
-//	}
+	//	if (input.substr(i, 1) == ",")
+	//	{
+	//		b++;
+	//		a1 = a2;
+	//		a2 = i + 1;
+	//		words.push_back(input.substr(a1 + 1, a2 - a1 - 3));
+	//	}
 
-//}
+	//}
 
-//for (int i = input.length()-2; ; i--)  //Last word
-//{
-//	if (input.substr(i,1)==",")
-//	{
-//		a1 = i+1;
-//		a2 = input.length()+1 ;
-//		words.push_back(input.substr(a1 + 1, a2 - a1 - 3));
-//		break;
-//	}
-//}
+	//for (int i = input.length()-2; ; i--)  //Last word
+	//{
+	//	if (input.substr(i,1)==",")
+	//	{
+	//		a1 = i+1;
+	//		a2 = input.length()+1 ;
+	//		words.push_back(input.substr(a1 + 1, a2 - a1 - 3));
+	//		break;
+	//	}
+	//}
 
-//for (int i = 0; i < words.size(); i++)
-//{
-//	if (if_trianglenumber(namescore(words[i])))
-//	{
-//		sum++;
-//	}
-//}
+	//for (int i = 0; i < words.size(); i++)
+	//{
+	//	if (if_trianglenumber(namescore(words[i])))
+	//	{
+	//		sum++;
+	//	}
+	//}
 
-//cout << sum;
+	//cout << sum;
 
-//-----------------------------------PROBLEM 43---------------------------------------
+	//-----------------------------------PROBLEM 43---------------------------------------
 
-//std::vector<std::vector<int>> pandigital = permutations({ 0,1,2,3,4,5,6,7,8,9 });
+	//std::vector<std::vector<int>> pandigital = permutations({ 0,1,2,3,4,5,6,7,8,9 });
 
-//std::vector<long long> primes = SieveOfEratosthenes(17);
+	//std::vector<long long> primes = SieveOfEratosthenes(17);
 
-//bool flag;
+	//bool flag;
 
-//long long count = 0;
+	//long long count = 0;
 
-//long long temp = 0;
+	//long long temp = 0;
 
-//for (int i = 0; i < pandigital.size(); i++)
-//{
-//	flag = true;
+	//for (int i = 0; i < pandigital.size(); i++)
+	//{
+	//	flag = true;
 
-//	for (int j = 1; j < 8; j++)
-//	{
+	//	for (int j = 1; j < 8; j++)
+	//	{
 
-//		//Calcular substring
-//		temp = 100 * pandigital[i][j];
-//		temp += 10 * pandigital[i][j + 1];
-//		temp += pandigital[i][j + 2];
+	//		//Calcular substring
+	//		temp = 100 * pandigital[i][j];
+	//		temp += 10 * pandigital[i][j + 1];
+	//		temp += pandigital[i][j + 2];
 
-//		if (temp % primes[j - 1])
-//		{
-//			flag = false;
-//			break;
-//		}
+	//		if (temp % primes[j - 1])
+	//		{
+	//			flag = false;
+	//			break;
+	//		}
 
-//	}
+	//	}
 
-//	if (flag)
-//	{
-//		temp = 0;
+	//	if (flag)
+	//	{
+	//		temp = 0;
 
-//		for (int l = 0; l < 10; l++)
-//		{
-//			temp += pandigital[i][l] * pow(10, 10 - l - 1);
-//		}
+	//		for (int l = 0; l < 10; l++)
+	//		{
+	//			temp += pandigital[i][l] * pow(10, 10 - l - 1);
+	//		}
 
-//		count += temp;
-//	}
+	//		count += temp;
+	//	}
 
-//}
+	//}
 
-//std::cout << count;
+	//std::cout << count;
 
-//-----------------------------------PROBLEM 44---------------------------------------
+	//-----------------------------------PROBLEM 44---------------------------------------
 
-/*long long sum = 0;
+	/*long long sum = 0;
 long long difference;
 long long min = 100000000;
 
@@ -3330,170 +3328,166 @@ min = difference;
 
 cout << min;*/
 
-//-----------------------------------PROBLEM 45--------------------------------------
+	//-----------------------------------PROBLEM 45--------------------------------------
 
-// Um número triangular é obrigatoriamente hexagonal. H(n) = T(2*n)
+	// Um número triangular é obrigatoriamente hexagonal. H(n) = T(2*n)
 
-//int ultimo = 0;
-//long long res = 0;
+	//int ultimo = 0;
+	//long long res = 0;
 
-//for (int i = 166;  ; i++)
-//{
-//
-//	res = 3 * i;
-//	res -= 1;
-//	res *= i;
-//	res /= 2;
+	//for (int i = 166;  ; i++)
+	//{
+	//
+	//	res = 3 * i;
+	//	res -= 1;
+	//	res *= i;
+	//	res /= 2;
 
-//	if (if_hexagonal(res))
-//	{
-//		std::cout << res;
-//		break;
-//	}
+	//	if (if_hexagonal(res))
+	//	{
+	//		std::cout << res;
+	//		break;
+	//	}
 
-//}
+	//}
 
-//-----------------------------------PROBLEM 46---------------------------------------
+	//-----------------------------------PROBLEM 46---------------------------------------
 
-//ofstream file;
-//file.open("46.txt",ofstream::out | std::ofstream::app);
-//file.is_open();
-//
-//cout << file.is_open() << endl;
-//
-//	for (int i = 3; ; i+=2)
-//	{
-//		if (!(if_primo(i)))
-//		{
-//
-//			for (int j = 2; j <= i; j++)
-//			{
-//				if (if_primo(j))
-//				{
-//					for (int l = 1; l < i; l++)
-//					{
-//						if (i == j + 2 * pow(l, 2))
-//						{
-//							goto cicle;
-//						}
-//
-//					}
-//
-//
-//				}
-//				if (j == i)
-//				{
-//					cout << i;
-//					file << i;
-//					goto fim;
-//				}
-//			}
-//		}
-//	cicle:;
-//	}
-//
-//fim:;
-//	file.close();
+	//ofstream file;
+	//file.open("46.txt",ofstream::out | std::ofstream::app);
+	//file.is_open();
+	//
+	//cout << file.is_open() << endl;
+	//
+	//	for (int i = 3; ; i+=2)
+	//	{
+	//		if (!(if_primo(i)))
+	//		{
+	//
+	//			for (int j = 2; j <= i; j++)
+	//			{
+	//				if (if_primo(j))
+	//				{
+	//					for (int l = 1; l < i; l++)
+	//					{
+	//						if (i == j + 2 * pow(l, 2))
+	//						{
+	//							goto cicle;
+	//						}
+	//
+	//					}
+	//
+	//
+	//				}
+	//				if (j == i)
+	//				{
+	//					cout << i;
+	//					file << i;
+	//					goto fim;
+	//				}
+	//			}
+	//		}
+	//	cicle:;
+	//	}
+	//
+	//fim:;
+	//	file.close();
 
-//-----------------------------------PROBLEM 47--------------------------------------
+	//-----------------------------------PROBLEM 47--------------------------------------
 
-// std::vector<int> primes = SieveOfEratosthenes(1000);
+	// std::vector<int> primes = SieveOfEratosthenes(1000);
 
+	// for (int i = 3; 100000; ++i)
+	// {
 
-// for (int i = 3; 100000; ++i)
-// {
+	// 	std::vector<int> first = problem47(i, primes);
+	// 	std::vector<int> second = problem47(i + 1, primes);
+	// 	std::vector<int> third = problem47(i + 2, primes);
+	// 	std::vector<int> fourth = problem47(i + 3, primes);
 
-// 	std::vector<int> first = problem47(i, primes);
-// 	std::vector<int> second = problem47(i + 1, primes);
-// 	std::vector<int> third = problem47(i + 2, primes);
-// 	std::vector<int> fourth = problem47(i + 3, primes);
+	// 	if (first.size() == 4 && second.size() == 4 && third.size() == 4 && fourth.size() == 4 && union_new(first, second).size() == 0 && union_new(second, third).size() == 0 && union_new(third, fourth).size() == 0)
+	// 	{
+	// 		std::cout << i;
+	// 		break;
+	// 	}
 
-// 	if (first.size() == 4 && second.size() == 4 && third.size() == 4 && fourth.size() == 4 && union_new(first, second).size() == 0 && union_new(second, third).size() == 0 && union_new(third, fourth).size() == 0)
-// 	{
-// 		std::cout << i;
-// 		break;
-// 	}
+	// }
 
-// }
+	//-----------------------------------PROBLEM 48---------------------------------------
 
+	////std::string numero = std::to_string(1);
 
-//-----------------------------------PROBLEM 48---------------------------------------
+	////for (int i = 2; i <= 100; i++)
+	////{
+	////	numero = bigadd(numero, bigpower(std::to_string(i), i));
+	////}
 
-////std::string numero = std::to_string(1);
+	//////std::cout << numero.substr(numero.length() - 11, 10);
 
-////for (int i = 2; i <= 100; i++)
-////{
-////	numero = bigadd(numero, bigpower(std::to_string(i), i));
-////}
+	////std::cout << numero;
 
-//////std::cout << numero.substr(numero.length() - 11, 10);
+	//std::vector<int> numero = itov(1);
 
-////std::cout << numero;
+	//for (int i = 2; i <= 1000; i++)
+	//{
+	//	numero = bigadd2(numero, bigpower2(itov(i), i));
+	//}
+	//
+	///*for (int i = 0; i < 10; i++)
+	//{
+	//	std::cout << numero[numero.size() - 1 - i];
+	//}*/
 
+	//vector_cout(numero);
 
-//std::vector<int> numero = itov(1);
+	//-----------------------------------PROBLEM 49---------------------------------------
 
-//for (int i = 2; i <= 1000; i++)
-//{
-//	numero = bigadd2(numero, bigpower2(itov(i), i));
-//}
-//
-///*for (int i = 0; i < 10; i++)
-//{
-//	std::cout << numero[numero.size() - 1 - i];
-//}*/
+	std::vector<int> primes = SieveOfEratosthenes(10000);
 
-//vector_cout(numero);
+	while (1)
+	{
 
+		if (primes.front() < 1000)
+			primes.erase(primes.begin());
+		else
+			break;
 
-//-----------------------------------PROBLEM 49---------------------------------------
+	}
 
-//std::vector<long long> primes = SieveOfEratosthenes(10000);
+	int subtract;
 
-//while (1)
-//{
+	std::vector<long long> numeros;
+	numeros.resize(3);
 
-//	if (primes.front() < 1000)
-//		primes.erase(primes.begin());
-//	else
-//		break;
+	for (int i = 0; i < primes.size(); i++)
+	{
+		numeros[0] = primes[i];
 
-//}
+		if (primes[i] == 1487)
+			continue;
 
-//int subtract;
+		for (int j = i + 1; j < primes.size(); j++)
+		{
+			numeros[1] = primes[j];
 
-//std::vector<long long> numeros;
-//numeros.resize(3);
+			numeros[2] = primes[j] + primes[j] - primes[i];
 
-//for (int i = 0; i < primes.size(); i++)
-//{
-//	numeros[0] = primes[i];
+			if (binary_search(primes.begin(), primes.end(), numeros[2]))
+			{
+				if (is_permutation(numeros))
+				{
+					for (int k = 0; k < 3; k++)
+					{
+						std::cout << numeros[k];
+						goto fim;
+					}
 
-//	if (primes[i] == 1487)
-//		continue;
+				}
 
-//	for (int j = i + 1; j < primes.size(); j++)
-//	{
-//		numeros[1] = primes[j];
+			}
 
-//		numeros[2] = primes[j] + primes[j] - primes[i];
-
-//		if (binary_search(primes.begin(), primes.end(), numeros[2]))
-//		{
-//			if (is_permutation(numeros))
-//			{
-//				for (int k = 0; k < 3; k++)
-//				{
-//					std::cout << numeros[k];
-//					goto fim;
-//				}
-
-//			}
-
-//		}
-
-//	}
-//}
+		}
+	}
 
 //-----------------------------------PROBLEM 50--------------------------------------
 
@@ -4339,41 +4333,41 @@ cout << min;*/
 
 	//-----------------------------------PROBLEM 73--------------------------------------
 
-	std::vector<long long> divd;
+	// std::vector<long long> divd;
 
-	int count = 0;
+	// int count = 0;
 
-	for (int d = 2; d <= 12000; d++)
-	{
-		divd = divisores(d);
+	// for (int d = 2; d <= 12000; d++)
+	// {
+	// 	divd = divisores(d);
 
-		for (int i = 0; i < divd.size(); i++)
-		{
-			if (!if_primo(divd[i]))
-				divd.erase(divd.begin() + i);
-		}
+	// 	for (int i = 0; i < divd.size(); i++)
+	// 	{
+	// 		if (!if_primo(divd[i]))
+	// 			divd.erase(divd.begin() + i);
+	// 	}
 
-		for (int n = ceil((double)d / 3 + 0.1) ; n < 0.5 * d; n++)
-		{
+	// 	for (int n = ceil((double)d / 3 + 0.1) ; n < 0.5 * d; n++)
+	// 	{
 	
-			for (int j = 0; j < divd.size(); j++) // Verificar se é divisivel por qualquer um dos divisores de d de modo a averiguar se forma uma fração reduzida
-			{
+	// 		for (int j = 0; j < divd.size(); j++) // Verificar se é divisivel por qualquer um dos divisores de d de modo a averiguar se forma uma fração reduzida
+	// 		{
 	
-				if (n % divd[j] == 0) // Se for divisivel por qualquer um dos divisores de d, então seguir para o numerador seguinte.
-					goto next_n;
-			}
+	// 			if (n % divd[j] == 0) // Se for divisivel por qualquer um dos divisores de d, então seguir para o numerador seguinte.
+	// 				goto next_n;
+	// 		}
 
-			count++;
+	// 		count++;
 
 
-		next_n: ;
+	// 	next_n: ;
 
-		}
+	// 	}
 
 	
-	}
+	// }
 
-	std::cout << count;
+	// std::cout << count;
 
 	//-----------------------------------PROBLEM 74--------------------------------------
 
@@ -4624,11 +4618,13 @@ cout << min;*/
 	// 		sum += 2;
 
 	// 	std::cout << "Soma = " << sum << '\n';
+	
+		fim: ;
+	}
+	
+		double deltaTime = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - begin).count() / (double)1e9 / maxRuns;
 
+		std::cout << "\nFinished in : " << deltaTime << " seconds.\n";
 
-	fim : double deltaTime = std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - begin).count() / (double)1e9;
-
-	std::cout << "\nFinished in : " << deltaTime << " seconds.\n";
-
-	return 0;
+		return 0;
 }

@@ -219,6 +219,10 @@ function categorizeFlags()
 		{
 			catFlags["generic"].push(flags[i]);
 		}
+		else
+		{
+			flags.splice(i, 1);
+		}
 	}
 }
 
@@ -238,23 +242,29 @@ function printCatFlags()
 	}
 }
 
+function flagAvailable(flag)
+{
+	for (let i = 0; i < flags.length; i++)
+	{
+		if (flags[i][0] === flag)
+			return true;
+	}
+
+	return false;
+}
 
 function compileWithFlags(src)
 {
-	let executableName = src.substr(src.lastIndexOf(path.sep)+1);
-	executableName = executableName.substr(0, executableName.lastIndexOf("."));
+	let executableName = src.substr(0, src.lastIndexOf("."));
 
 	let cmd = "g++ " + src + " -std=c++11 -o " + executableName;
 
-	for (catIndex in catFlags)
+	for (let i = 0; i < flags.length; i++)
 	{
-		let category = catFlags[catIndex];
-
-		for (let i = 0; i < category.length; i++)
-		{
-			cmd += " " + category[i][0];
-		}
+		cmd += " " + flags[i][0];
 	}
+
+	console.log(cmd);
 
 	const { exec } = require('child_process');
 	exec(cmd, (err, stdout, stderr) => {
@@ -283,7 +293,7 @@ exec('g++ --help=optimizers', (err, stdout, stderr) =>
 
 		printCatFlags();
 
-		// compileWithFlags("src" + path.sep + "target" + path.sep + "main.cpp");
+		compileWithFlags("src" + path.sep + "target" + path.sep + "main.cpp");
 	}
 	else
 	{
