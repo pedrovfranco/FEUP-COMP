@@ -19,16 +19,16 @@ aspectdef Resolver
     executor.setPrintToConsole(false);
     executor.execute("g++ --help=optimizers");
 
-    parseflags(executor.getConsoleOutput().split("\n"));
-    categorizeflags();
-    printcatflags();
+    parseFlags(executor.getConsoleOutput().split("\n"));
+    categorizeFlags();
+    printCatFlags();
 
 
 
 	
 end
 
-function parseflags($lines)
+function parseFlags($lines)
 {
 	for (var i = 1; i < $lines.length; i++)
 	{
@@ -72,7 +72,7 @@ function parseflags($lines)
 }
 
 
-function categorizeflags()
+function categorizeFlags()
 {
 	$catflags["generic"] = [];
 	$catflags["recursive"] = [];
@@ -114,17 +114,18 @@ function categorizeflags()
 }
 
 
-function printcatflags()
+function printCatFlags()
 {
 	for (var catIndex in $catflags)
 	{
-		print(catIndex + ":\n");
 		var category = $catflags[catIndex];
+		print(catIndex + "(" + category.length + ")" + ":" + "\n");
+
 		for (var i = 0; i < category.length; i++)
 		{
-			print(category[i][0] + " : " + category[i][1]);
+			print(category[i][0] + " : " + category[i][1] + "\n");
 		}
-		print("\n\n");
+		print("\n");
 	}
 }
 
