@@ -12,7 +12,6 @@ Thumbs.db
 # Eclipse-related files #
 #########################
 .metadata/
-bin/
 RemoteSystemsTempFiles/
 .recommenders/
 
