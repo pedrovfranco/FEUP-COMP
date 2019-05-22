@@ -1,6 +1,12 @@
 import clava.autopar.Parallelize;
+import lara.metrics.ExecutionTimeMetric;
+import lara.cmake.CMaker;
 
-aspectdef OmpParallelization
+
+var $flags = [];
+var $catflags = [];
+
+aspectdef Resolver
 
 	var $loops = [];
 	select loop end
@@ -8,14 +14,21 @@ aspectdef OmpParallelization
 	    $loops.push($loop);
 	end
 	print($loops.length);
+
+	var executor = new ProcessExecutor();
+    executor.setPrintToConsole(false);
+    executor.execute("g++ --help=optimizers");
+
+    parseflags(executor.getConsoleOutput().split("\n"));
+    categorizeflags();
+    printcatflags();
+
+
+
 	
 end
 
-var $lines = [];
-var $flags = [];
-var $catflags = [];
-
-function parseflags()
+function parseflags($lines)
 {
 	for (var i = 1; i < $lines.length; i++)
 	{
@@ -105,13 +118,37 @@ function printcatflags()
 {
 	for (var catIndex in $catflags)
 	{
-		console.log(catIndex + ":\n");
+		print(catIndex + ":\n");
 		var category = $catflags[catIndex];
 		for (var i = 0; i < category.length; i++)
 		{
-			console.log(category[i][0] + " : " + category[i][1]);
+			print(category[i][0] + " : " + category[i][1]);
 		}
-		console.log("\n\n");
+		print("\n\n");
 	}
 }
+
+
+// gcc --help=optimizers
+/*var { exec } = require('child_process');
+exec('gcc --help=optimizers', (err, stdout, stderr) =>
+{	
+	if (!err)
+	{
+		$lines = stdout.split("\n");
+		parseflags();
+
+		categorizeflags();
+
+		printcatflags();
+	
+	}
+	else
+	{
+		console.log("Node couldn't execute the command!");
+		return;
+	}
+});
+*/
+
 
