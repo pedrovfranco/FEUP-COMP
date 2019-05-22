@@ -126,7 +126,11 @@ function parseFlags(lines)
 
 		if (line.search("-") == -1 && flags.length != 0)
 		{
-			flags[flags.length-1][1] = flags[flags.length-1][1].concat(line.replace(/\s\s+/g, " ").replace(/\r/g, "").replace(".", ""));
+			let a = line.replace(/\s\s+/g, " ");
+			let b = a.replace(/\r/, "");
+			let c = b.replace(".", "");
+
+			flags[flags.length - 1][1] = flags[flags.length - 1][1].concat(line.replace(/\s\s+/g, " ").replace(/\r/g, "").replace(/\n/g, "").replace(/\./g, ""));
 			continue;
 		}
 
@@ -155,7 +159,7 @@ function parseFlags(lines)
 		if (flagName.search("=") != -1)
 			continue;
 
-		let description = line.substr(j).replace("\r", "").replace(".", "");
+		let description = line.substr(j).replace(/\r/g, "").replace(/\n/g, "").replace(/\./g, "");
 
 		flags.push([flagName, description]);
 	}
@@ -212,13 +216,13 @@ function printCatFlags()
 	for (let catIndex in catFlags)
 	{
 		let category = catFlags[catIndex];
-		console.log(catIndex + "(" + category.length + ")" + ":\n");
+		console.log(catIndex + "(" + category.length + ")" + ":");
 
 		for (let i = 0; i < category.length; i++)
 		{
 			console.log(category[i][0] + " : " + category[i][1]);
 		}
-		console.log("\n\n");
+		console.log("");
 	}
 }
 
@@ -273,7 +277,7 @@ exec('g++ --help=optimizers', (err, stdout, stderr) =>
 
 		printCatFlags();
 
-		compileWithFlags("src" + path.sep + "target" + path.sep + "main.cpp");
+		// compileWithFlags("src" + path.sep + "target" + path.sep + "main.cpp");
 	}
 	else
 	{
