@@ -1,0 +1,91 @@
+import LaradSetup;
+
+/**
+ * Represents a language in the DSE (e.g., C, C++...)
+ *
+ */
+var DseLanguage = {};
+
+DseLanguage._extraSources = [];
+DseLanguage._extraIncludes = [];
+
+//function DseLanguage() {}
+
+/*** PUBLIC FUNCTIONS ***/
+
+DseLanguage.addExtraSources = function(extraSources) {
+
+	// Add extra sources to kernel files to compile
+	for(var extraSource of extraSources) {
+		DseLanguage._extraSources.push(extraSource);
+	}
+
+}
+
+DseLanguage.addExtraIncludes = function(extraIncludes) {
+
+	// Add extra sources to kernel files to compile
+	for(var extraInclude of extraIncludes) {
+		DseLanguage._extraIncludes.push(extraInclude);
+	}
+
+}
+
+DseLanguage.getExtraSources = function() {
+	return DseLanguage._extraSources;
+}
+
+DseLanguage.getExtraIncludes = function() {
+	return DseLanguage._extraIncludes;
+}
+
+DseLanguage.getExtraIncludesFlags = function() {
+	var includeFlags = [];
+	
+	for(var includeFolder of DseLanguage.getExtraIncludes()) {
+		includeFlags.push("-I" + includeFolder);
+	}
+	
+	return includeFlags;
+}
+
+
+/*** PUBLIC FUNCTIONS THAT SHOULD BE OVERRIDEN ***/
+
+DseLanguage.clean = function() {
+	throw "DseLanguage.clean() not implemented for language '" + LaradSetup.language + "'";
+}
+
+/**
+ * Prepares the code for instrumentation.
+ *
+ * @return {DataStore} DataStore to be used when calling the weaver to instrument the code
+ */
+DseLanguage.prepareCodeForInstrumentation = function() {
+	throw "DseLanguage.prepareCodeForInstrumentation() not implemented for language '" + LaradSetup.language + "'";
+}
+
+DseLanguage.prepareCodeForCompilation = function() {
+	throw "DseLanguage.prepareCodeForCompilation() not implemented for language '" + LaradSetup.language + "'";
+}
+
+/**
+ * @returns {Array} An array with paths to the files related to launching the program (e.g., main() function)
+ */
+DseLanguage.getLauncherFilesToCompile = function() {
+	throw "DseLanguage.getLauncherFilesToCompile() not implemented for language '" + LaradSetup.language + "'";
+}
+
+/**
+ * @returns {Array} An array with paths to the files related to verification of the program
+ */
+DseLanguage.getVerificationFilesToCompile = function() {
+	throw "DseLanguage.getFilesToCompile() not implemented for language '" + LaradSetup.language + "'";
+}
+
+/**
+ * @returns {Array} An array with paths to the files related to the part of the program we want to optimize
+ */
+DseLanguage.getKernelFilesToCompile = function() {
+	throw "DseLanguage.getKernelFilesToCompile() not implemented for language '" + LaradSetup.language + "'";
+}

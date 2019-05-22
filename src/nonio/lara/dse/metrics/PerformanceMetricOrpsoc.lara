@@ -1,0 +1,36 @@
+import lara.metrics.Metric;
+import lara.metrics.MetricResult;
+import dse.metrics.PerformanceMetricOrpsocAspects;
+import lara.Strings;
+
+/**
+ * Measures performance an OpenRISC application.
+ * @constructor
+ */
+function PerformanceMetricOrpsoc() {
+    // Parent constructor
+    Metric.call(this, "Performance");
+}
+// Inheritance
+PerformanceMetricOrpsoc.prototype = Object.create(Metric.prototype);
+
+
+// Override
+PerformanceMetricOrpsoc.prototype.instrument = function($start, $end) {
+
+	call OrpsocInstrument();
+}
+
+// Override
+PerformanceMetricOrpsoc.prototype.report = function(processExecutor) {
+	var value = Strings.extractValue("CPU cycles: ", processExecutor.getConsoleOutput());
+	return new MetricResult(value, "cycles");
+}
+
+// Override
+PerformanceMetricOrpsoc.prototype.getImport = function() {
+		return "dse.metrics.PerformanceMetricOrpsoc";
+}
+
+
+

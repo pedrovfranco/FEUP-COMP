@@ -2,3 +2,5 @@
 *.class
 .vscode
 *main.exe
+*woven_code
+*.exe

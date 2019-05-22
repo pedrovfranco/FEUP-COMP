@@ -1,7 +1,3 @@
-// Exercícios C++.cpp : Defines the entry point for the console application.
-//
-
-//#include "stdafx.h"
 #include <iostream>
 #include <vector>
 #include <cmath>
@@ -1031,7 +1027,7 @@ long long ultdivprimo(long long n)
 	long long res[100];
 
 	for (i = 2; i <= sqrt(n); i++) {
-		if (n % i == 0) // A divisão entre "n" e o seu divisor mais pequeno resulta no seu maior divisor
+		if (n % i == 0) // A divisÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o entre "n" e o seu divisor mais pequeno resulta no seu maior divisor
 		{ // Assim, consigo obter os divisores de "n" por ordem decrescente
 	a++;
 	res[a] = i;
@@ -1771,7 +1767,7 @@ bool is_permutation(std::vector<long long> input)
 		temp /= 10;
 	}
 
-	for (int i = 1; i < input.size(); i++) // O vetor vezes contem o numero de vezes que cada digito aparece em temp no indice desse digito, por exemplo: "11232" : vezes[1] == 2 , vezes[2] == 2, vezes[3] == 1 tudo o resto é 0
+	for (int i = 1; i < input.size(); i++) // O vetor vezes contem o numero de vezes que cada digito aparece em temp no indice desse digito, por exemplo: "11232" : vezes[1] == 2 , vezes[2] == 2, vezes[3] == 1 tudo o resto ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â© 0
 	{
 		temp = input[i];
 
@@ -1813,7 +1809,7 @@ bool is_permutation2(std::vector<long long> input)
 	vezes.push_back(row);
 
 
-	for (int i = 1; i < input.size(); i++) // O vetor vezes contem o numero de vezes que cada digito aparece em temp no indice desse digito, por exemplo: "11232" : vezes[1] == 2 , vezes[2] == 2, vezes[3] == 1 tudo o resto é 0
+	for (int i = 1; i < input.size(); i++) // O vetor vezes contem o numero de vezes que cada digito aparece em temp no indice desse digito, por exemplo: "11232" : vezes[1] == 2 , vezes[2] == 2, vezes[3] == 1 tudo o resto ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â© 0
 	{
 		for (int j = 0; j < row.size(); j++)
 		{
@@ -1849,10 +1845,10 @@ int euler_totient(int d)
 
 	for (int n = 2; n < d; n++) {
 
-		for (int j = 0; j < divd.size(); j++) //Verificar se é divisivel por qualquer um dos divisores de d de modo a averiguar se forma uma fração reduzida
+		for (int j = 0; j < divd.size(); j++) //Verificar se ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â© divisivel por qualquer um dos divisores de d de modo a averiguar se forma uma fraÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o reduzida
 		{
 
-			if (n % divd[j] == 0) // Se for divisivel por qualquer um dos divisores de d, então seguir para o numerador seguinte.
+			if (n % divd[j] == 0) // Se for divisivel por qualquer um dos divisores de d, entÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o seguir para o numerador seguinte.
 				goto next_n;
 		}
 
@@ -2205,7 +2201,7 @@ int problem61()
 
 	int tempadd, tempcount;
 
-	// Gerar os números de P
+	// Gerar os nÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºmeros de P
 	tempadd = 0;
 	tempcount = 1;
 	while (tempadd < 10000)
@@ -2633,7 +2629,7 @@ int main()
 
 	//int res[20][20];
 
-	//for (int i = 0; i < 20; i++) //Registar os número da grid no array res
+	//for (int i = 0; i < 20; i++) //Registar os nÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºmero da grid no array res
 	//{
 
 	//	for (int j = 0; j < 20; j++)
@@ -2649,12 +2645,12 @@ int main()
 	//long long multi;
 	//long long max = 0;
 
-	////Multiplicação dos números na diagonal, esquerda para a direita
+	////MultiplicaÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o dos nÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºmeros na diagonal, esquerda para a direita
 
-	//for (int i = 0; i < 17; i++) //Iteração do numero inicial na vertical
+	//for (int i = 0; i < 17; i++) //IteraÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o do numero inicial na vertical
 	//{
 
-	//	for (int j = 0; j < 17; j++) //Iteração do numero inicial na horizontal
+	//	for (int j = 0; j < 17; j++) //IteraÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o do numero inicial na horizontal
 	//	{
 
 	//		multi = res[i][j] * res[i + 1][j + 1] * res[i + 2][j + 2] * res[i + 3][j + 3];
@@ -2666,12 +2662,12 @@ int main()
 
 	//}
 
-	////Multiplicação dos números na diagonal, direita para a esquerda
+	////MultiplicaÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o dos nÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºmeros na diagonal, direita para a esquerda
 
-	//for (int i = 0; i < 17; i++) //Iteração do numero inicial na vertical
+	//for (int i = 0; i < 17; i++) //IteraÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o do numero inicial na vertical
 	//{
 
-	//	for (int j = 19; j > 2; j--) //Iteração do numero inicial na horizontal
+	//	for (int j = 19; j > 2; j--) //IteraÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o do numero inicial na horizontal
 	//	{
 
 	//		multi = res[i][j] * res[i + 1][j - 1] * res[i + 2][j - 2] * res[i + 3][j - 3];
@@ -2683,12 +2679,12 @@ int main()
 
 	//}
 
-	////Multiplicação dos números na horizontal
+	////MultiplicaÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o dos nÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºmeros na horizontal
 
-	//for (int i = 0; i < 20; i++) //Iteração do numero inicial na vertical
+	//for (int i = 0; i < 20; i++) //IteraÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o do numero inicial na vertical
 	//{
 
-	//	for (int j = 0; j < 17; j++) //Iteração do numero inicial na horizontal
+	//	for (int j = 0; j < 17; j++) //IteraÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o do numero inicial na horizontal
 	//	{
 
 	//		multi = res[i][j] * res[i][j + 1] * res[i][j + 2] * res[i][j + 3];
@@ -2700,12 +2696,12 @@ int main()
 
 	//}
 
-	////Multiplicação dos números na vertical
+	////MultiplicaÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o dos nÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºmeros na vertical
 
-	//for (int i = 0; i < 17; i++) //Iteração do numero inicial na vertical
+	//for (int i = 0; i < 17; i++) //IteraÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o do numero inicial na vertical
 	//{
 
-	//	for (int j = 0; j < 20; j++) //Iteração do numero inicial na horizontal
+	//	for (int j = 0; j < 20; j++) //IteraÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o do numero inicial na horizontal
 	//	{
 
 	//		multi = res[i][j] * res[i + 1][j] * res[i + 2][j] * res[i + 3][j];
@@ -2836,7 +2832,7 @@ int main()
 
 	//std::vector<int> combi;
 
-	//for (int i = 1; i < 30123; i++)  //Gerar números abundantes, ou seja, numeros que sejam menores que a soma dos seus divisores
+	//for (int i = 1; i < 30123; i++)  //Gerar nÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºmeros abundantes, ou seja, numeros que sejam menores que a soma dos seus divisores
 	//{
 
 	//	if (somadedivisores(i) > i)
@@ -2844,7 +2840,7 @@ int main()
 
 	//}
 
-	//for (int i = 0; i < abundant.size(); i++)  //Gerar todas as somas de dois números abundantes
+	//for (int i = 0; i < abundant.size(); i++)  //Gerar todas as somas de dois nÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºmeros abundantes
 	//{
 
 	//	for (int j = i; j < abundant.size(); j++)
@@ -2858,7 +2854,7 @@ int main()
 
 	//long long count = 0;
 
-	//for (int i = 1; i <= 28123; i++)  //Somar todos os números que não sejam somas de números abundantes
+	//for (int i = 1; i <= 28123; i++)  //Somar todos os nÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºmeros que nÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o sejam somas de nÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºmeros abundantes
 	//{
 
 	//	if (!std::binary_search(combi.begin(), combi.end(), i))
@@ -2912,7 +2908,7 @@ for (int i = 0; i < 10; ++i)
 	//int amax = 0;
 	//int bmax = 0;
 
-	//for (int a = -999; a < 1000; a++)                             // n^2 + a*n + b é a função que retorna os valores primos consecutivos começando em n = 0.
+	//for (int a = -999; a < 1000; a++)                             // n^2 + a*n + b ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â© a funÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o que retorna os valores primos consecutivos comeÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ando em n = 0.
 	//{
 
 	//	for (int b = 0; b < 1000; b++)
@@ -3330,7 +3326,7 @@ cout << min;*/
 
 	//-----------------------------------PROBLEM 45--------------------------------------
 
-	// Um número triangular é obrigatoriamente hexagonal. H(n) = T(2*n)
+	// Um nÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºmero triangular ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â© obrigatoriamente hexagonal. H(n) = T(2*n)
 
 	//int ultimo = 0;
 	//long long res = 0;
@@ -3505,10 +3501,10 @@ cout << min;*/
 //int sum = 0;
 //int place;
 
-//for (int i = 0; i < primes.size(); i++)    //Índice do primo para verificar o numero de somas de numeros primos consecutivos
+//for (int i = 0; i < primes.size(); i++)    //ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã‚Â¯Ãƒâ€šÃ‚Â¿Ãƒâ€šÃ‚Â½ndice do primo para verificar o numero de somas de numeros primos consecutivos
 //{
 
-//	for (int j = 0; j < i; j++)   //Número inicial para começar a soma
+//	for (int j = 0; j < i; j++)   //NÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºmero inicial para comeÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ar a soma
 //	{
 //		sum = 0;
 //		conta = 0;
@@ -3788,7 +3784,7 @@ cout << min;*/
 
 	//int tempadd, tempcount;
 
-	//// Gerar os números de P
+	//// Gerar os nÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºmeros de P
 	//tempadd = 0;
 	//tempcount = 1;
 	//while (tempadd < 10000)
@@ -4264,7 +4260,7 @@ cout << min;*/
 
 	// 		divd.clear();
 
-	// 	for (int i = 0; primes[i] <= d/2; i++) // divd contém agora apenas os divisores primos de d.
+	// 	for (int i = 0; primes[i] <= d/2; i++) // divd contÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â©m agora apenas os divisores primos de d.
 	// 	{
 	// 		if (d % primes[i] == 0)
 	// 		{
@@ -4275,10 +4271,10 @@ cout << min;*/
 	// 	for (int n = 2; n < d; n++)
 	// 	{
 
-	// 		for (int j = 0; j < divd.size(); j++)	// Verificar se n é divisivel por qualquer um dos divisores de d de modo a averiguar se forma uma fração reduzida
+	// 		for (int j = 0; j < divd.size(); j++)	// Verificar se n ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â© divisivel por qualquer um dos divisores de d de modo a averiguar se forma uma fraÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o reduzida
 	// 		{
 
-	// 			if (n % divd[j] == 0) // Se for divisivel por qualquer um dos divisores de d, então seguir para o numerador seguinte.
+	// 			if (n % divd[j] == 0) // Se for divisivel por qualquer um dos divisores de d, entÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o seguir para o numerador seguinte.
 	// 				goto next_n;
 
 	// 		}
@@ -4300,7 +4296,7 @@ cout << min;*/
 	//	divd = divisores(d);
 	//	multiplos.clear();
 
-	//	for (int i = 0; i < divd.size(); i++) // divd contém agora apenas os divisores primos de d.
+	//	for (int i = 0; i < divd.size(); i++) // divd contÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â©m agora apenas os divisores primos de d.
 	//	{
 	//		if (!if_primo(divd[i]))
 	//		{
@@ -4350,10 +4346,10 @@ cout << min;*/
 	// 	for (int n = ceil((double)d / 3 + 0.1) ; n < 0.5 * d; n++)
 	// 	{
 	
-	// 		for (int j = 0; j < divd.size(); j++) // Verificar se é divisivel por qualquer um dos divisores de d de modo a averiguar se forma uma fração reduzida
+	// 		for (int j = 0; j < divd.size(); j++) // Verificar se ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â© divisivel por qualquer um dos divisores de d de modo a averiguar se forma uma fraÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â§ÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o reduzida
 	// 		{
 	
-	// 			if (n % divd[j] == 0) // Se for divisivel por qualquer um dos divisores de d, então seguir para o numerador seguinte.
+	// 			if (n % divd[j] == 0) // Se for divisivel por qualquer um dos divisores de d, entÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â£o seguir para o numerador seguinte.
 	// 				goto next_n;
 	// 		}
 

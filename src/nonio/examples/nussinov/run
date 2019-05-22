@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+export NONIO_HOME=$../../
+
+shopt -s expand_aliases
+source ~/.profile
+
+clava ../../LaradLauncher.lara --argv=arguments.properties -b 2

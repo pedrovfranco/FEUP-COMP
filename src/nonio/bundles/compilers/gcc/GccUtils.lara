@@ -1,0 +1,37 @@
+import lara.Io;
+import lara.Platforms;
+import lara.System;
+import LaradSetup;
+
+var GccUtils = {};
+
+GccUtils.getGcc = function() {
+	var compilerFolder = LaradSetup.getCompilerFolder();
+	return System.getExecutableFile(LaradSetup.getCompilerPrefix() + "gcc", compilerFolder, true);
+}
+
+// Created for the MINIAPP
+GccUtils.getGccCPP = function() {
+        var compilerFolder = LaradSetup.getCompilerFolder();
+        return System.getExecutableFile(LaradSetup.getCompilerPrefix() + "g++", compilerFolder, true);
+}
+
+GccUtils.getAs = function() {
+        var compilerFolder = LaradSetup.getCompilerFolder();
+        return System.getExecutableFile(LaradSetup.getCompilerPrefix() + "as", compilerFolder, true);
+}
+
+GccUtils.getSize = function() {
+        var compilerFolder = LaradSetup.getCompilerFolder();
+        return System.getExecutableFile(LaradSetup.getCompilerPrefix() + "size", compilerFolder, true);
+}
+
+
+
+GccUtils.getApplicationExeName = function() {
+	return LaradSetup.getExeName("application.exe");
+}
+
+GccUtils.getVerifyExeName = function() {
+	return LaradSetup.getExeName("application_verify.exe");
+}
