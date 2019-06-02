@@ -1,8 +1,11 @@
 import clava.autopar.Parallelize;
 import lara.metrics.ExecutionTimeMetric;
 import lara.cmake.CMaker;
+import lara.Io;
 
 
+
+var $rawflags = [];
 var $flags = [];
 var $catflags = [];
 
@@ -23,10 +26,22 @@ aspectdef Resolver
     categorizeFlags();
     printCatFlags();
 
-
+    Io.writeJson("output/outputFlags.json", $rawflags);
 
 	
 end
+
+
+function addFlag(flagName, flagDescription)
+{
+	$rawflags.push(flagName);
+	$flags.push([flagName, flagDescription]);
+}
+
+function removeFlag(i)
+{
+
+}
 
 function parseFlags($lines)
 {
@@ -67,7 +82,7 @@ function parseFlags($lines)
 
 		var description = line.substr(j)['replace']("\r", "")['replace'](".", "");
 
-		$flags.push([flagName, description]);
+		addFlag(flagName, description);
 	}
 }
 

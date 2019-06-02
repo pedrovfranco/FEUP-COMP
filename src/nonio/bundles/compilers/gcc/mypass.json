@@ -1,0 +1,10 @@
+[
+	"-funsafe-loop-optimizations",
+	"-funsafe-math-optimizations",
+	"-fvariable-expansion-in-unroller",
+	"-fvpt",
+	"-fweb",
+	"-fwhole-program",
+	"-fwpa",
+	"-fzero-initialized-in-bss"
+]

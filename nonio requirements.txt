@@ -1,0 +1,5 @@
+Nonio:
+	3 ficheiros : foo.c foo_main.c foo_verify.c
+	foo_verify.c igual a foo_main.c
+	foo.c é um ficheiro no qual está a função a correr
+	foo_main.c é um ficheiro que contém uma função main, na qual é preciso #pragma monitor start antes da chamada à função de foo.c e #pragma monitor stop depois. A função main retorna 10 em sucesso.

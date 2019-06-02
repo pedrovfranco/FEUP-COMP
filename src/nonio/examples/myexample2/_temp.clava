@@ -1,0 +1,86 @@
+<SimpleDataStore>
+  <name>Clava</name>
+  <values>
+    <entry>
+      <string>include</string>
+      <org.lara.interpreter.joptions.keys.FileList>
+        <fileList>
+          <file>../../../nonio</file>
+          <file>../../lara</file>
+          <file>../../bundles/compilers</file>
+          <file>../../bundles/algorithms</file>
+          <file>../../bundles/platforms</file>
+          <file>../../bundles/languages</file>
+          <file>../../includes/scripts</file>
+          <file>../../../nonio</file>
+        </fileList>
+      </org.lara.interpreter.joptions.keys.FileList>
+    </entry>
+    <entry>
+      <string>loc</string>
+      <boolean>false</boolean>
+    </entry>
+    <entry>
+      <string>library includes</string>
+      <org.lara.interpreter.joptions.keys.FileList>
+        <fileList/>
+      </org.lara.interpreter.joptions.keys.FileList>
+    </entry>
+    <entry>
+      <string>Disable Clava Info</string>
+      <boolean>false</boolean>
+    </entry>
+    <entry>
+      <string>argv</string>
+      <string>{laradFoldername:&apos;/home/pedro/Desktop/git/FEUP-COMP/src/nonio&apos;, compiler:&apos;gcc&apos;, compilerFolderName:undefined, compilerPrefix: &apos;&apos;, sourceFile:&apos;/home/pedro/Desktop/git/FEUP-COMP/src/nonio/examples/myexample2/foo.c&apos;, nsteps:10, seqlen:32, metrics: [&apos;performance&apos;], language: &apos;c&apos;, alreadyInstrumented: false, isVerificationSeparated: false, nexec: 1, clean: 1, passes: &apos;&apos;, percent: 2, nexec: 1, minimumExecForReporting: 30, specialLinker: &apos;undefined&apos;, specialAssembler: &apos;undefined&apos;, target: &apos;host-intel&apos;, storeResults: &apos;true&apos;, algoExtra: &apos;{}&apos;}</string>
+    </entry>
+    <entry>
+      <string>tools</string>
+      <org.lara.interpreter.joptions.keys.OptionalFile>
+        <file>../../resources/tools.xml</file>
+        <used>true</used>
+      </org.lara.interpreter.joptions.keys.OptionalFile>
+    </entry>
+    <entry>
+      <string>verbose</string>
+      <org.lara.interpreter.joptions.config.interpreter.VerboseLevel>warnings</org.lara.interpreter.joptions.config.interpreter.VerboseLevel>
+    </entry>
+    <entry>
+      <string>header includes</string>
+      <org.lara.interpreter.joptions.keys.FileList>
+        <fileList/>
+      </org.lara.interpreter.joptions.keys.FileList>
+    </entry>
+    <entry>
+      <string>Compiler Flags</string>
+      <string></string>
+    </entry>
+    <entry>
+      <string>Compiler Flags in list format</string>
+      <org.suikasoft.GsonPlus.JsonStringList>
+        <stringList/>
+      </org.suikasoft.GsonPlus.JsonStringList>
+    </entry>
+    <entry>
+      <string>aspect</string>
+      <file>../../Larad.lara</file>
+    </entry>
+    <entry>
+      <string>Disable Weaving</string>
+      <boolean>true</boolean>
+    </entry>
+    <entry>
+      <string>C/C++ Standard</string>
+      <pt.up.fe.specs.clava.language.Standard>C99</pt.up.fe.specs.clava.language.Standard>
+    </entry>
+    <entry>
+      <string>stack trace</string>
+      <boolean>true</boolean>
+    </entry>
+    <entry>
+      <string>restrict mode</string>
+      <boolean>false</boolean>
+    </entry>
+  </values>
+  <strict>false</strict>
+</SimpleDataStore>

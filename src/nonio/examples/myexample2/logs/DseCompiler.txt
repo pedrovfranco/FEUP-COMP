@@ -1,0 +1,85 @@
+[Sun, 02 Jun 2019 19:10:09 GMT] gcc main_wtiming.c -march=native -S -o main_wtiming.s
+[Sun, 02 Jun 2019 19:10:11 GMT] gcc -march=native -fopenmp -Ofast -O1 function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:10:11 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:10:11 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:10:37 GMT] gcc -march=native -fopenmp -Ofast -O2 function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:10:37 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:10:37 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:10:59 GMT] gcc -march=native -fopenmp -Ofast -O3 function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:10:59 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:11:00 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:11:00 GMT] gcc -march=native -fopenmp -Ofast -Os function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:11:00 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:11:00 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:11:23 GMT] gcc -march=native -fopenmp -Ofast -Ofast function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:11:23 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:11:23 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:11:24 GMT] gcc -march=native -fopenmp -Ofast -fvariable-expansion-in-unroller function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:11:24 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:11:24 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:11:25 GMT] gcc -march=native -fopenmp -Ofast -fvariable-expansion-in-unroller -fweb function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:11:25 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:11:26 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:11:26 GMT] gcc -march=native -fopenmp -Ofast -fvpt -fvariable-expansion-in-unroller -fweb function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:11:26 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:11:26 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:11:26 GMT] gcc -march=native -fopenmp -Ofast -funsafe-math-optimizations -fvpt -fvariable-expansion-in-unroller -fweb function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:11:26 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:11:26 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:11:27 GMT] gcc -march=native -fopenmp -Ofast -funsafe-math-optimizations -fvpt -fvpt -fvariable-expansion-in-unroller -fweb function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:11:27 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:11:27 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:11:27 GMT] gcc -march=native -fopenmp -Ofast -funsafe-math-optimizations -fvpt -fvpt -fvariable-expansion-in-unroller -fvpt -fweb function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:11:27 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:11:27 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:11:27 GMT] gcc -march=native -fopenmp -Ofast -funsafe-math-optimizations -fvpt -fvpt -fvpt -fvariable-expansion-in-unroller -fvpt -fweb function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:11:27 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:11:28 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:11:28 GMT] gcc -march=native -fopenmp -Ofast -funsafe-math-optimizations -fvpt -fvpt -fvpt -fvpt -fvariable-expansion-in-unroller -fvpt -fweb function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:11:28 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:11:28 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:11:28 GMT] gcc -march=native -fopenmp -Ofast -funsafe-math-optimizations -fvpt -funsafe-loop-optimizations -fvpt -fvpt -fvpt -fvariable-expansion-in-unroller -fvpt -fweb function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:11:28 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:11:28 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:11:29 GMT] gcc -march=native -fopenmp -Ofast -funsafe-math-optimizations -fvpt -funsafe-loop-optimizations -funsafe-math-optimizations -fvpt -fvpt -fvpt -fvariable-expansion-in-unroller -fvpt -fweb function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:11:29 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:11:29 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:11:29 GMT] gcc -march=native -fopenmp -Ofast -funsafe-math-optimizations -fvpt -funsafe-loop-optimizations -funsafe-math-optimizations -fvpt -fvpt -fvpt -fvariable-expansion-in-unroller -fvpt -fweb function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:11:29 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:11:30 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:11:52 GMT] gcc -march=native -fopenmp -Ofast -funsafe-math-optimizations -fvpt -funsafe-loop-optimizations -funsafe-math-optimizations -fvpt -fvpt -fvpt -fvariable-expansion-in-unroller -fvpt -fweb function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:11:52 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:11:52 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:12:13 GMT] gcc -march=native -fopenmp -Ofast -fvpt -funsafe-loop-optimizations -funsafe-math-optimizations -fvpt -fvpt -fvpt -fvariable-expansion-in-unroller -fvpt -fweb function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:12:13 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:12:13 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:12:34 GMT] gcc -march=native -fopenmp -Ofast -funsafe-loop-optimizations -funsafe-math-optimizations -fvpt -fvpt -fvpt -fvariable-expansion-in-unroller -fvpt -fweb function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:12:34 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:12:34 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:12:35 GMT] gcc -march=native -fopenmp -Ofast -funsafe-math-optimizations -fvpt -fvpt -fvpt -fvariable-expansion-in-unroller -fvpt -fweb function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:12:35 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:12:35 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:12:35 GMT] gcc -march=native -fopenmp -Ofast -fvpt -fvpt -fvpt -fvariable-expansion-in-unroller -fvpt -fweb function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:12:35 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:12:35 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:12:35 GMT] gcc -march=native -fopenmp -Ofast -fvpt -fvpt -fvariable-expansion-in-unroller -fvpt -fweb function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:12:36 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:12:36 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:12:36 GMT] gcc -march=native -fopenmp -Ofast -fvpt -fvariable-expansion-in-unroller -fvpt -fweb function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:12:36 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:12:36 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:12:36 GMT] gcc -march=native -fopenmp -Ofast -fvariable-expansion-in-unroller -fvpt -fweb function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:12:36 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:12:37 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:12:37 GMT] gcc -march=native -fopenmp -Ofast -fvpt -fweb function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:12:37 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:12:37 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:12:37 GMT] gcc -march=native -fopenmp -Ofast -fweb function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:12:37 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:12:37 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:12:38 GMT] gcc -march=native -fopenmp -Ofast  function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:12:38 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:12:38 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread
+[Sun, 02 Jun 2019 19:12:39 GMT] gcc -march=native -fopenmp -Ofast  function.c -S -o function.optim.s
+[Sun, 02 Jun 2019 19:12:39 GMT] as function.optim.s -o function.optim.o
+[Sun, 02 Jun 2019 19:12:39 GMT] gcc -o ./application.exe function.optim.s main_wtiming.s   -march=native -fopenmp -lm -lpthread

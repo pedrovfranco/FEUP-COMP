@@ -2,8 +2,13 @@ Relatório:
 	https://docs.google.com/document/d/1A6cKLg3zpoj-VYVuIlJK84H1v1reflaNV1JnsucEuTE/edit?fbclid=IwAR1NYUgtY5Iq3D9ZKXexk8fEJM6o6Gmz_VnLn9onEh2C2_brorTy_MzhlVo
 	
 CLANG/LARA:
+	http://specs.fe.up.pt/tools/clava/doc/
 	http://specs.fe.up.pt/tools/clava/
 	https://web.fe.up.pt/~specs/projects/lara/doku.php
-
+	
 GCC Flags:
 	https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html
+
+SAN DIEGO:
+	http://parallel.ucsd.edu/vision/
+	https://bitbucket.org/taylor-bsg/cortexsuite/src/devel/vision/benchmarks/

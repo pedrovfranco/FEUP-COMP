@@ -1,0 +1,15 @@
+import lara.metrics.ExecutionTimeMetric;
+
+
+aspectdef DseMetricsInstrumentAux
+	input $start, $end end
+	
+	checkDefined($start, "$start", "DseMetricsInstrumentAux");
+	if($end === undefined) {
+		$end = $start;
+	}
+	
+new ExecutionTimeMetric().instrument($start, $end);
+
+	
+end
