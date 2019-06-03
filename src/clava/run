@@ -1,1 +1,1 @@
-clava run.lara -p ../target/simple.cpp -b 2
+clava run.lara -p ../target/simple.c -b 2

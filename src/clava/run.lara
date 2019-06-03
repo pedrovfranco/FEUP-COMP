@@ -2,12 +2,17 @@ import clava.autopar.Parallelize;
 import lara.metrics.ExecutionTimeMetric;
 import lara.cmake.CMaker;
 import lara.Io;
+import clava.Clava;
+import clava.ClavaCode;
 
 
 
 var $rawflags = [];
 var $flags = [];
 var $catflags = [];
+var folderName = "flagRecommender";
+var passName = folderName + ".json";
+var main;
 
 aspectdef Resolver
 
@@ -16,7 +21,7 @@ aspectdef Resolver
 	apply
 	    $loops.push($loop);
 	end
-	print($loops.length);
+	// print($loops.length);
 
 	var executor = new ProcessExecutor();
     executor.setPrintToConsole(false);
@@ -26,16 +31,67 @@ aspectdef Resolver
     categorizeFlags();
     // printCatFlags();
 
+    call getMain();
+
+    // callNonio();
+
 end
+
+
+aspectdef getMain
+	
+	var root;
+    select program end
+    apply
+    	root = $program;
+    end
+
+    root = root.astChild(0); // root = file
+    var children = root.astChildren;
+
+    for (var i = 0; i < children.length; i++)
+    {
+    	if (children[i].name === "main")
+    	{
+    		main = children[i];
+    		print("Got the main!");
+    		break;
+    	}
+    }
+
+end
+
+
+
 
 function callNonio()
 {
-    Io.writeJson("output/outputFlags.json", $rawflags);
+	prepareNonioFiles();
 
-	executor.setPrintToConsole(true);
-    executor.setWorkingDir("../nonio/examples/myexample2/");
-    executor.execute("nonio arguments.properties -b 2");
+	var executor = new ProcessExecutor();
+    executor.setPrintToConsole(false);
 
+    executor.setWorkingDir("../nonio/examples/" + folderName);
+    // executor.execute("nonio arguments.properties -b 2");
+    executor.setPrintToConsole(true);
+    executor.execute("pwd");
+}
+
+function prepareNonioFiles()
+{
+	Io.writeJson("../nonio/bundles/compilers/gcc/" + passName, $rawflags);
+
+	Io.deleteFolder("../nonio/examples/"  + folderName);
+	Io.mkdir("../nonio/examples/" + folderName);
+
+
+	ClavaCode.toSingleFile('ouput.c');
+}
+
+function createArgumentsFile()
+{
+	var content = "";
+	content += "sourceFile = 'foo.c'";
 }
 
 
@@ -47,7 +103,7 @@ function addFlag(flagName, flagDescription)
 
 function removeFlag(i)
 {
-
+	$flags.splice(i);
 }
 
 function parseFlags($lines)
