@@ -36,3 +36,13 @@ ivy/
 ### ignore media formats
 *.mp4
 *.wmv
+
+*_temp.clava
+*clava_src/
+*dse_results.json
+*function.c
+*.o
+*instrumentation_results.json
+*logs
+*main_verify.c
+*main_wtiming.c
