@@ -1,6 +1,4 @@
 
-#include "foo.c"
-
 void foo();
 
 int main()

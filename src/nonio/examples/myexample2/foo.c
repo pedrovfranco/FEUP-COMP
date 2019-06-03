@@ -1,6 +1,6 @@
 void foo()
 {
-	int i,j, sum = 0, max = 30000;
+	int i,j, sum = 0, max = 1000;
 
 	for (i = 0; i < max; ++i)
 	{

@@ -24,12 +24,19 @@ aspectdef Resolver
 
     parseFlags(executor.getConsoleOutput().split("\n"));
     categorizeFlags();
-    printCatFlags();
+    // printCatFlags();
 
+end
+
+function callNonio()
+{
     Io.writeJson("output/outputFlags.json", $rawflags);
 
-	
-end
+	executor.setPrintToConsole(true);
+    executor.setWorkingDir("../nonio/examples/myexample2/");
+    executor.execute("nonio arguments.properties -b 2");
+
+}
 
 
 function addFlag(flagName, flagDescription)
