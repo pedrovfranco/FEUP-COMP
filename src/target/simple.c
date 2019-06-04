@@ -1,5 +1,3 @@
-#include <stdio.h>
-
 
 int sum2()
 {
@@ -8,6 +6,8 @@ int sum2()
 	{
 		sum += i;
 	}
+
+	return sum;
 }
 
 int sum()
@@ -27,7 +27,5 @@ int main()
 
 	sum();
 	
-	printf("ola");
-
 	return 0;
 }

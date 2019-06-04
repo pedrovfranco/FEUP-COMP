@@ -4,6 +4,8 @@ import lara.cmake.CMaker;
 import lara.Io;
 import clava.Clava;
 import clava.ClavaCode;
+import clava.ClavaJoinPoints;
+
 
 
 
@@ -13,27 +15,28 @@ var $catflags = [];
 var folderName = "flagRecommender";
 var passName = folderName + ".json";
 var main;
+var filename;
 
 aspectdef Resolver
 
 	var $loops = [];
 	select loop end
 	apply
-	    $loops.push($loop);
+		$loops.push($loop);
 	end
 	// print($loops.length);
 
 	var executor = new ProcessExecutor();
-    executor.setPrintToConsole(false);
-    executor.execute("g++ --help=optimizers");
+	executor.setPrintToConsole(false);
+	executor.execute("g++ --help=optimizers");
 
-    parseFlags(executor.getConsoleOutput().split("\n"));
-    categorizeFlags();
-    // printCatFlags();
+	parseFlags(executor.getConsoleOutput().split("\n"));
+	categorizeFlags();
+	// printCatFlags();
 
-    call getMain();
+	call getMain();
 
-    // callNonio();
+	callNonio();
 
 end
 
@@ -41,26 +44,60 @@ end
 aspectdef getMain
 	
 	var root;
-    select program end
-    apply
-    	root = $program;
-    end
+	select program end
+	apply
+		root = $program;
+	end
 
-    root = root.astChild(0); // root = file
-    var children = root.astChildren;
 
-    for (var i = 0; i < children.length; i++)
-    {
-    	if (children[i].name === "main")
-    	{
-    		main = children[i];
-    		print("Got the main!");
-    		break;
-    	}
-    }
+	root = root.astChild(0); // root = file
+	// print(root.astNumChildren + "\n");
+	// print(root.code + "\n");
 
+	var children = root.astChildren;
+
+	for (var i = 0; i < children.length; i++)
+	{
+		if (children[i].name === "main")
+		{
+			main = children[i];
+			print("Got the main!\n");
+			main.name = "originalMain";
+			// print(main.code + "\n");
+			break;
+		}
+	}
+
+	// print(root.code + "\n");
 end
 
+function createNonioCodeFiles()
+{
+	var file = main.parent;
+
+	var newMain = main.clone("main");
+	var children = newMain.astChild(0).astChildren;
+
+	for (var i = 0; i < children.length-1; i++)
+	{
+		children[i].detach();
+	}
+	
+	var lastNode = children[children.length-1];
+	lastNode = lastNode.replaceWith("#pragma monitor start");
+	lastNode = lastNode.insertAfter("int ret = originalMain();");
+	lastNode = lastNode.insertAfter("#pragma monitor stop");
+	lastNode = lastNode.insertAfter("if (ret == 0) return 10;");
+	lastNode = lastNode.insertAfter("else return 1;");
+
+	Io.writeFile("../nonio/examples/" + folderName + "/" + folderName + "_main.c", "int originalMain();\n\n" + newMain.code);
+	Io.writeFile("../nonio/examples/" + folderName + "/" + folderName + "_verify.c", "int originalMain();\n\n" + newMain.code);
+
+
+	newMain.detach();
+
+	Io.writeFile("../nonio/examples/" + folderName + "/" + folderName + ".c", file.code);
+}
 
 
 
@@ -69,12 +106,12 @@ function callNonio()
 	prepareNonioFiles();
 
 	var executor = new ProcessExecutor();
-    executor.setPrintToConsole(false);
+	executor.setPrintToConsole(false);
 
-    executor.setWorkingDir("../nonio/examples/" + folderName);
-    // executor.execute("nonio arguments.properties -b 2");
-    executor.setPrintToConsole(true);
-    executor.execute("pwd");
+	executor.setWorkingDir("../nonio/examples/" + folderName);
+	// executor.execute("nonio arguments.properties -b 2");
+	executor.setPrintToConsole(true);
+	executor.execute("pwd");
 }
 
 function prepareNonioFiles()
@@ -84,14 +121,34 @@ function prepareNonioFiles()
 	Io.deleteFolder("../nonio/examples/"  + folderName);
 	Io.mkdir("../nonio/examples/" + folderName);
 
+	createArgumentsFile();
 
-	ClavaCode.toSingleFile('ouput.c');
+	createNonioCodeFiles();
+
+	// ClavaCode.toSingleFile('ouput.c');
 }
 
 function createArgumentsFile()
 {
 	var content = "";
-	content += "sourceFile = 'foo.c'";
+	
+	content += "\nsourceFile = '" + folderName + ".c'\n";
+	content += "compiler = 'gcc'\n";
+	content += "nsteps = 10\n";
+	content += "language = 'c'\n";
+	content += "target = 'host-intel'\n";
+	content += "algo = 'sa'\n";
+	content += "seqlen = 32\n";
+	content += "nexec = 1\n";
+	content += "minimumExecForReporting = 30\n";
+	content += "passes = ''\n";
+	content += "percent = 2\n";
+	content += "append = ''\n";
+	content += "metrics = ['performance']\n";
+	content += "alreadyInstrumented = false\n";
+	content += "storeResults = true";
+
+	Io.writeFile("../nonio/examples/" + folderName + "/arguments.properties", content);
 }
 
 
