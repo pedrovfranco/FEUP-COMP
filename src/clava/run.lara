@@ -14,9 +14,12 @@ var $flags = [];
 var $catflags = [];
 var folderName = "flagRecommender";
 var passName = folderName + ".json";
+var root;
 var main;
 var filename;
-var nonioResults;
+var results;
+var firstFunction;
+var files;
 
 aspectdef Resolver
 
@@ -44,32 +47,48 @@ end
 
 aspectdef getMain
 	
-	var root;
+	root;
 	select program end
 	apply
 		root = $program;
 	end
 
-
 	root = root.astChild(0); // root = file
-	// print(root.astNumChildren + "\n");
-	// print(root.code + "\n");
-
 	var children = root.astChildren;
 
+	firstFunction = null;
 	for (var i = 0; i < children.length; i++)
 	{
-		if (children[i].name === "main")
+		if (children[i].joinpointType === "include")
 		{
-			main = children[i];
-			print("Got the main!\n");
-			main.name = "originalMain";
-			// print(main.code + "\n");
-			break;
+			if (children[i].code.search(/\".*\"/) != -1)
+			{
+				children[i].detach();
+			}
 		}
+
+		if (children[i].joinpointType === "function")
+		{
+			if (firstFunction === null)
+				firstFunction = children[i];
+
+			if (children[i].name === "main")
+			{
+				main = children[i];
+				print("Got the main!\n");
+			}			
+		}
+
 	}
 
-	// print(root.code + "\n");
+	var simple2Filename = "../target/simple2.c";
+	var files = [main.filename, simple2Filename.substr(simple2Filename.lastIndexOf('/')+1)];
+
+	// print(files);
+
+	var simple2 = Io.readFile(simple2Filename);
+	firstFunction.insertBefore(simple2);
+
 end
 
 
@@ -77,20 +96,21 @@ function callNonio()
 {
 	prepareNonioFiles();
 
-	var executor = new ProcessExecutor();
-	executor.setPrintToConsole(false);
-
-	executor.setWorkingDir("../nonio/examples/" + folderName + "/");
-	executor.setPrintToConsole(true);
-	executor.execute("nonio arguments.properties -b 2");
+	// var executor = new ProcessExecutor();
+	// executor.setPrintToConsole(false);
+	// executor.setWorkingDir("../nonio/examples/" + folderName + "/");
+	// executor.setPrintToConsole(true);
+	// executor.execute("nonio arguments.properties -b 2");
 
 	getNonioResults();
+
+	compileWithBestResult();
 }
 
 function prepareNonioFiles()
 {
-	Io.deleteFolder("../nonio/examples/"  + folderName);
-	Io.mkdir("../nonio/examples/" + folderName);
+	// Io.deleteFolder("../nonio/examples/"  + folderName);
+	// Io.mkdir("../nonio/examples/" + folderName);
 
 	createArgumentsFile();
 
@@ -105,7 +125,7 @@ function createArgumentsFile()
 	
 	content += "\nsourceFile = '" + folderName + ".c'\n";
 	content += "compiler = 'gcc'\n";
-	content += "nsteps = 30\n";
+	content += "nsteps = 100\n";
 	content += "language = 'c'\n";
 	content += "target = 'host-intel'\n";
 	content += "algo = 'sa'\n";
@@ -126,6 +146,7 @@ function createNonioCodeFiles()
 {
 	var file = main.parent;
 
+	main.name = "originalMain";
 	var newMain = main.clone("main");
 	var children = newMain.astChild(0).astChildren;
 
@@ -144,7 +165,6 @@ function createNonioCodeFiles()
 	Io.writeFile("../nonio/examples/" + folderName + "/" + folderName + "_main.c", "int originalMain();\n\n" + newMain.code);
 	Io.writeFile("../nonio/examples/" + folderName + "/" + folderName + "_verify.c", "int originalMain();\n\n" + newMain.code);
 
-
 	newMain.detach();
 
 	Io.writeFile("../nonio/examples/" + folderName + "/" + folderName + ".c", file.code);
@@ -162,14 +182,14 @@ function createPass()
 
 function getNonioResults()
 {
-	nonioResults = Io.readJson("../nonio/examples/" + folderName + "/dse_results.json");
+	var nonioResults = Io.readJson("../nonio/examples/" + folderName + "/dse_results.json");
 
 	if (nonioResults.length == 1)
-			nonioResults = nonioResults[0];
+		nonioResults = nonioResults[0];
 
 	var i = 0;
 	var ignore = true;
-	var results = [];
+	results = [];
 	var flagCombination;
 	var flagTime;
 	for (var foo in nonioResults) // Pass from json to array
@@ -201,7 +221,7 @@ function getNonioResults()
 
 
 	results = results.sort(function(a, b) {
-  		return a[1]-b[1];
+		return a[1]-b[1];
 	});
 
 	print("----------------------- Top 10 results: -----------------------\n");
@@ -209,6 +229,25 @@ function getNonioResults()
 	{
 		print("flags: '" + results[i][0] + "' , time: " + results[i][1] + "\n");
 	}
+}
+
+function compileWithBestResult()
+{
+	var args = results[0][0][0].split(" ");
+	main.name = "main";
+
+	var cmaker = new CMaker("binary", false);
+	cmaker.addCurrentAst();
+
+	print(root.code + "\n");
+
+	for (var i = 0; i < args.length; i++)
+	{
+		cmaker.addCFlags(args[i]);
+	}
+
+	var exe =  cmaker.build("temp", ".");
+	println("Exe: " + exe);
 }
 
 
@@ -221,6 +260,7 @@ function addFlag(flagName, flagDescription)
 function removeFlag(i)
 {
 	$flags.splice(i);
+	$rawflags.splice(i);
 }
 
 function parseFlags($lines)
