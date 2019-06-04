@@ -16,6 +16,7 @@ var folderName = "flagRecommender";
 var passName = folderName + ".json";
 var main;
 var filename;
+var nonioResults;
 
 aspectdef Resolver
 
@@ -71,6 +72,56 @@ aspectdef getMain
 	// print(root.code + "\n");
 end
 
+
+function callNonio()
+{
+	prepareNonioFiles();
+
+	var executor = new ProcessExecutor();
+	executor.setPrintToConsole(false);
+
+	executor.setWorkingDir("../nonio/examples/" + folderName + "/");
+	executor.setPrintToConsole(true);
+	executor.execute("nonio arguments.properties -b 2");
+
+	getNonioResults();
+}
+
+function prepareNonioFiles()
+{
+	Io.deleteFolder("../nonio/examples/"  + folderName);
+	Io.mkdir("../nonio/examples/" + folderName);
+
+	createArgumentsFile();
+
+	createNonioCodeFiles();
+
+	createPass();
+}
+
+function createArgumentsFile()
+{
+	var content = "";
+	
+	content += "\nsourceFile = '" + folderName + ".c'\n";
+	content += "compiler = 'gcc'\n";
+	content += "nsteps = 30\n";
+	content += "language = 'c'\n";
+	content += "target = 'host-intel'\n";
+	content += "algo = 'sa'\n";
+	content += "seqlen = 32\n";
+	content += "nexec = 1\n";
+	content += "minimumExecForReporting = 30\n";
+	content += "passes = ''\n";
+	content += "percent = 2\n";
+	content += "append = ''\n";
+	content += "metrics = ['performance']\n";
+	content += "alreadyInstrumented = false\n";
+	content += "storeResults = true";
+
+	Io.writeFile("../nonio/examples/" + folderName + "/arguments.properties", content);
+}
+
 function createNonioCodeFiles()
 {
 	var file = main.parent;
@@ -99,56 +150,65 @@ function createNonioCodeFiles()
 	Io.writeFile("../nonio/examples/" + folderName + "/" + folderName + ".c", file.code);
 }
 
-
-
-function callNonio()
-{
-	prepareNonioFiles();
-
-	var executor = new ProcessExecutor();
-	executor.setPrintToConsole(false);
-
-	executor.setWorkingDir("../nonio/examples/" + folderName);
-	// executor.execute("nonio arguments.properties -b 2");
-	executor.setPrintToConsole(true);
-	executor.execute("pwd");
-}
-
-function prepareNonioFiles()
+function createPass()
 {
 	Io.writeJson("../nonio/bundles/compilers/gcc/" + passName, $rawflags);
 
-	Io.deleteFolder("../nonio/examples/"  + folderName);
-	Io.mkdir("../nonio/examples/" + folderName);
-
-	createArgumentsFile();
-
-	createNonioCodeFiles();
-
-	// ClavaCode.toSingleFile('ouput.c');
+	var platformFile = Io.readJson("../nonio/bundles/platforms/host-intel/target_config.json");
+	platformFile['compiler']['gcc']['passes'] = passName;
+	Io.deleteFile("../nonio/bundles/platforms/host-intel/target_config.json");
+	Io.writeJson("../nonio/bundles/platforms/host-intel/target_config.json", platformFile);
 }
 
-function createArgumentsFile()
+function getNonioResults()
 {
-	var content = "";
-	
-	content += "\nsourceFile = '" + folderName + ".c'\n";
-	content += "compiler = 'gcc'\n";
-	content += "nsteps = 10\n";
-	content += "language = 'c'\n";
-	content += "target = 'host-intel'\n";
-	content += "algo = 'sa'\n";
-	content += "seqlen = 32\n";
-	content += "nexec = 1\n";
-	content += "minimumExecForReporting = 30\n";
-	content += "passes = ''\n";
-	content += "percent = 2\n";
-	content += "append = ''\n";
-	content += "metrics = ['performance']\n";
-	content += "alreadyInstrumented = false\n";
-	content += "storeResults = true";
+	nonioResults = Io.readJson("../nonio/examples/" + folderName + "/dse_results.json");
 
-	Io.writeFile("../nonio/examples/" + folderName + "/arguments.properties", content);
+	if (nonioResults.length == 1)
+			nonioResults = nonioResults[0];
+
+	var i = 0;
+	var ignore = true;
+	var results = [];
+	var flagCombination;
+	var flagTime;
+	for (var foo in nonioResults) // Pass from json to array
+	{
+			for (var bar in nonioResults[foo])
+			{
+				for (var foobar in nonioResults[foo][bar])
+				{
+					if (nonioResults[foo][bar][foobar] == "-O1")
+						ignore = false;
+
+					if (!ignore)
+					{
+						if (i % 2 == 0)
+						{
+							flagCombination = nonioResults[foo][bar][foobar];
+						}
+						else
+						{
+							flagTime = nonioResults[foo][bar][foobar];
+							results.push([flagCombination, flagTime]);
+						}
+					}
+
+					i++;
+				}
+			}
+	}
+
+
+	results = results.sort(function(a, b) {
+  		return a[1]-b[1];
+	});
+
+	print("----------------------- Top 10 results: -----------------------\n");
+	for (var i = 0; i < results.length && i < 10; i++)
+	{
+		print("flags: '" + results[i][0] + "' , time: " + results[i][1] + "\n");
+	}
 }
 
 
@@ -263,28 +323,3 @@ function printCatFlags()
 		print("\n");
 	}
 }
-
-
-// gcc --help=optimizers
-/*var { exec } = require('child_process');
-exec('gcc --help=optimizers', (err, stdout, stderr) =>
-{	
-	if (!err)
-	{
-		$lines = stdout.split("\n");
-		parseflags();
-
-		categorizeflags();
-
-		printcatflags();
-	
-	}
-	else
-	{
-		console.log("Node couldn't execute the command!");
-		return;
-	}
-});
-*/
-
-
