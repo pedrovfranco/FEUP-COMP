@@ -16,6 +16,7 @@ var folderName = "flagRecommender";
 var passName = folderName + ".json";
 var root;
 var main;
+var mainFile;
 var filename;
 var results;
 var firstFunction;
@@ -47,48 +48,99 @@ end
 
 aspectdef getMain
 	
-	root;
 	select program end
 	apply
 		root = $program;
 	end
 
-	root = root.astChild(0); // root = file
-	var children = root.astChildren;
+	files = [];
+	var file, children;
 
-	firstFunction = null;
+	for (var i = 0; i < root.astNumChildren; i++)
+	{
+		file = root.astChild(i);
+		children = file.astChildren;
+		files.push(file.filename);
+
+		firstFunction = null;
+		for (var i = 0; i < children.length; i++) // Remove local includes and find main
+		{
+			if (children[i].joinpointType === "include")
+			{
+				if (children[i].code.search(/\".*\"/) != -1)
+				{
+					children[i].detach();
+				}
+			}
+
+			if (children[i].joinpointType === "function")
+			{
+				if (children[i].name === "main")
+				{
+					main = children[i];
+					mainFile = file;
+					print("Got the main!\n");
+				}			
+			}
+
+		}
+	}
+
+	// Find first function of main file
+	file = mainFile;
+	children = file.astChildren;
+
 	for (var i = 0; i < children.length; i++)
 	{
-		if (children[i].joinpointType === "include")
-		{
-			if (children[i].code.search(/\".*\"/) != -1)
-			{
-				children[i].detach();
-			}
-		}
-
 		if (children[i].joinpointType === "function")
 		{
 			if (firstFunction === null)
-				firstFunction = children[i];
-
-			if (children[i].name === "main")
 			{
-				main = children[i];
-				print("Got the main!\n");
-			}			
+				firstFunction = children[i];
+				break;
+			}
 		}
-
 	}
 
-	var simple2Filename = "../target/simple2.c";
-	var files = [main.filename, simple2Filename.substr(simple2Filename.lastIndexOf('/')+1)];
+	for (var i = 0; i < root.astNumChildren; i++) // Move includes to main file
+	{
+		var file = root.astChild(i);
 
-	// print(files);
+		if (file.filename === main.filename)
+			continue;
 
-	var simple2 = Io.readFile(simple2Filename);
-	firstFunction.insertBefore(simple2);
+		var children = file.astChildren;
 
+		for (var i = 0; i < children.length; i++)
+		{
+			print(children[i].joinpointType + "\n");
+			if (children[i].joinpointType === "include")
+			{
+				children[i].detach();
+				firstFunction.insertBefore(children[i].code);
+			}
+		}
+	}
+
+	for (var i = 0; i < root.astNumChildren; i++) // Move rest of file
+	{
+		var file = root.astChild(i);
+
+		if (file.filename === main.filename)
+			continue;
+
+		var children = file.astChildren;
+
+		for (var i = 0; i < children.length; i++)
+		{
+			children[i].detach();
+			firstFunction = firstFunction.insertBefore(children[i].code);
+		}
+
+		file.detach();
+	}
+
+	print(root.code);
 end
 
 
@@ -96,11 +148,11 @@ function callNonio()
 {
 	prepareNonioFiles();
 
-	// var executor = new ProcessExecutor();
-	// executor.setPrintToConsole(false);
-	// executor.setWorkingDir("../nonio/examples/" + folderName + "/");
-	// executor.setPrintToConsole(true);
-	// executor.execute("nonio arguments.properties -b 2");
+	var executor = new ProcessExecutor();
+	executor.setPrintToConsole(false);
+	executor.setWorkingDir("../nonio/examples/" + folderName + "/");
+	executor.setPrintToConsole(true);
+	executor.execute("nonio arguments.properties -b 2");
 
 	getNonioResults();
 
@@ -109,8 +161,8 @@ function callNonio()
 
 function prepareNonioFiles()
 {
-	// Io.deleteFolder("../nonio/examples/"  + folderName);
-	// Io.mkdir("../nonio/examples/" + folderName);
+	Io.deleteFolder("../nonio/examples/"  + folderName);
+	Io.mkdir("../nonio/examples/" + folderName);
 
 	createArgumentsFile();
 
