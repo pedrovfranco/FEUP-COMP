@@ -3,9 +3,9 @@ Relatório:
 	
 CLANG/LARA:
 	http://specs.fe.up.pt/tools/clava/doc/
+	http://specs.fe.up.pt/tools/clava/language_specification.html
 	http://specs.fe.up.pt/tools/clava/
 	https://web.fe.up.pt/~specs/projects/lara/doku.php
-	http://specs.fe.up.pt/tools/clava/language_specification.html
 	
 GCC Flags:
 	https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html

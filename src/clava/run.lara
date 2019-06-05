@@ -102,6 +102,13 @@ aspectdef getMain
 		}
 	}
 
+	mergeFiles();
+
+end
+
+
+function mergeFiles()
+{
 	for (var i = 0; i < root.astNumChildren; i++) // Move includes to main file
 	{
 		var file = root.astChild(i);
@@ -113,7 +120,6 @@ aspectdef getMain
 
 		for (var i = 0; i < children.length; i++)
 		{
-			print(children[i].joinpointType + "\n");
 			if (children[i].joinpointType === "include")
 			{
 				children[i].detach();
@@ -139,10 +145,7 @@ aspectdef getMain
 
 		file.detach();
 	}
-
-	print(root.code);
-end
-
+}
 
 function callNonio()
 {
@@ -177,7 +180,7 @@ function createArgumentsFile()
 	
 	content += "\nsourceFile = '" + folderName + ".c'\n";
 	content += "compiler = 'gcc'\n";
-	content += "nsteps = 100\n";
+	content += "nsteps = 50\n";
 	content += "language = 'c'\n";
 	content += "target = 'host-intel'\n";
 	content += "algo = 'sa'\n";
@@ -290,8 +293,6 @@ function compileWithBestResult()
 
 	var cmaker = new CMaker("binary", false);
 	cmaker.addCurrentAst();
-
-	print(root.code + "\n");
 
 	for (var i = 0; i < args.length; i++)
 	{
