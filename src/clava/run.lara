@@ -281,7 +281,6 @@ function callNonio()
 {
 	prepareNonioFiles();
 
-	/*
 	var executor = new ProcessExecutor();
 	executor.setPrintToConsole(false);
 	executor.setWorkingDir("../nonio/examples/" + folderName + "/");
@@ -290,7 +289,7 @@ function callNonio()
 
 	getNonioResults();
 
-	compileWithBestResult();*/
+	compileWithBestResult();
 }
 
 function prepareNonioFiles()
@@ -339,21 +338,13 @@ function createNonioCodeFiles()
 {
 	main.name = "originalMain";
 
-//	println(main.code);
-
 	var newMain = main.clone("main");
-	var children;
-
-	if (newMain.astNumChildren == 1)
-		children = newMain.astChild(0).astChildren;
-	else
-		children = newMain.astChildren;
+	var children = newMain.astChild(newMain.astNumChildren-1).astChildren;
 
 	for (var i = 0; i < children.length-1; i++)
 	{
 		children[i].detach();
 	}
-
 
 	var lastNode = children[children.length-1];
 	lastNode = lastNode.replaceWith("#pragma monitor start");

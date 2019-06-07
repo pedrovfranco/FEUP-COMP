@@ -46,3 +46,5 @@ ivy/
 *logs
 *main_verify.c
 *main_wtiming.c
+
+examples/
