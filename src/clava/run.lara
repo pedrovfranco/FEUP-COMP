@@ -21,7 +21,7 @@ var results;
 var firstFunction;
 var files;
 
-var $inlinne_flags = false; 
+var $inlinne = false; 
 var $loop_flags = false;
 var $math = false;
 var $floating = false;
@@ -36,10 +36,11 @@ aspectdef Resolver
 
 	parseFlags(executor.getConsoleOutput().split("\n"));
 	categorizeFlags();
-
+	printCatFlags();
 	call getMain();
 
 	call Analisys();
+	removeFlags();
 
 	callNonio();
 
@@ -68,7 +69,6 @@ aspectdef Analisys
 		println($functions.length);
 	    for (f = 0;f < $functions.length;f++)
 	    {
-			print($functions[f].code);
 	    	stmt = getStatements($functions[f]);
 	    	$statements.push(stmt);
 	    }
@@ -464,6 +464,45 @@ function removeFlag(i)
 	$rawflags.splice(i);
 }
 
+function removeFlagByName(n)
+{
+	for (var i = 0; i < $flags.length;i++){
+		if($flags[i] == n){
+			$flags.splice(i);
+			break;
+		}
+	}
+}
+
+function removeFlags()
+{
+	if(!$string){
+		for(var i = 0;i < $catflags['string'].length; i++){
+			removeFlagByName($catflags['string'][i]);
+		}
+	}
+	if(!$loop_flags){
+		for(var i = 0;i < $catflags['loop'].length; i++){
+			removeFlagByName($catflags['loop'][i]);
+		}
+	}
+	if(!$floating){
+		for(var i = 0;i < $catflags['float'].length; i++){
+			removeFlagByName($catflags['float'][i]);
+		}
+	}
+	if(!$math){
+		for(var i = 0;i < $catflags['math'].length; i++){
+			removeFlagByName($catflags['math'][i]);
+		}
+	}
+	if(!$inlinne){
+		for(var i = 0;i < $catflags['inlinne'].length; i++){
+			removeFlagByName($catflags['inlinne'][i]);
+		}
+	}
+}
+
 function parseFlags($lines)
 {
 	for (var i = 1; i < $lines.length; i++)
@@ -511,7 +550,7 @@ function parseFlags($lines)
 function categorizeFlags()
 {
 	$catflags["generic"] = [];
-	$catflags["recursive"] = [];
+	$catflags["inlinne"] = [];
 	$catflags["loop"] = [];
 	$catflags["float"] = [];
 	$catflags["string"] = [];
@@ -530,9 +569,9 @@ function categorizeFlags()
 		{
 			$catflags["math"].push($flags[i]);
 		}
-		else if ($flags[i][0].search("recurs") != -1 || $flags[i][1].search("recurs") != -1)
+		else if ($flags[i][0].search("inlin") != -1 || $flags[i][1].search("inlin") != -1)
 		{
-			$catflags["recursive"].push($flags[i]);
+			$catflags["inlinne"].push($flags[i]);
 		}
 		else if ($flags[i][0].search("string") != -1 || $flags[i][1].search("string") != -1)
 		{
