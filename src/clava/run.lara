@@ -429,7 +429,6 @@ function getNonioResults()
 
 function compileWithBestResult()
 {
-	var args = results[0][0][0].split(" ");
 	main.name = "main";
 
 	var binaryName;
@@ -442,13 +441,13 @@ function compileWithBestResult()
 	var cmaker = new CMaker(binaryName, false);
 	cmaker.addCurrentAst();
 
-	for (var i = 0; i < args.length; i++)
+	for (var i = 0; i < results[0][0].length; i++)
 	{
-		cmaker.addCFlags(args[i]);
+		cmaker.addCFlags(results[0][0][i]);
 	}
 
 	var binary =  cmaker.build("temp", ".");
-	print("Compiling with best combination(" + results[0][0][0] + ") to " + binary);
+	print("Compiling with best combination(" + results[0][0] + ") to " + binary);
 }
 
 
