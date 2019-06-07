@@ -8,7 +8,6 @@ import clava.ClavaJoinPoints;
 
 
 
-
 var $rawflags = [];
 var $flags = [];
 var $catflags = [];
@@ -60,7 +59,6 @@ aspectdef getMain
 	{
 		file = root.astChild(i);
 		children = file.astChildren;
-		files.push(file.filename);
 
 		firstFunction = null;
 		for (var i = 0; i < children.length; i++) // Remove local includes and find main
@@ -171,19 +169,26 @@ function prepareNonioFiles()
 
 	createNonioCodeFiles();
 
-	createPass();
+	createPassFile();
 }
 
-function createArgumentsFile()
+function createArgumentsFile(nsteps, algo)
 {
+	if (nsteps == undefined)
+		nsteps = 50;
+
+	if (algo == undefined)
+		algo = "sa";
+
+
 	var content = "";
 	
 	content += "\nsourceFile = '" + folderName + ".c'\n";
 	content += "compiler = 'gcc'\n";
-	content += "nsteps = 50\n";
+	content += "nsteps = " + nsteps + "\n";
 	content += "language = 'c'\n";
 	content += "target = 'host-intel'\n";
-	content += "algo = 'sa'\n";
+	content += "algo = " + "'" + algo + "'\n";
 	content += "seqlen = 32\n";
 	content += "nexec = 1\n";
 	content += "minimumExecForReporting = 30\n";
@@ -225,7 +230,7 @@ function createNonioCodeFiles()
 	Io.writeFile("../nonio/examples/" + folderName + "/" + folderName + ".c", file.code);
 }
 
-function createPass()
+function createPassFile()
 {
 	Io.writeJson("../nonio/bundles/compilers/gcc/" + passName, $rawflags);
 
@@ -242,41 +247,46 @@ function getNonioResults()
 	if (nonioResults.length == 1)
 		nonioResults = nonioResults[0];
 
-	var i = 0;
 	var ignore = true;
 	results = [];
 	var flagCombination;
 	var flagTime;
 	for (var foo in nonioResults) // Pass from json to array
 	{
-			for (var bar in nonioResults[foo])
+		for (var bar in nonioResults[foo])
+		{
+			if (ignore)
 			{
 				for (var foobar in nonioResults[foo][bar])
 				{
 					if (nonioResults[foo][bar][foobar] == "-O1")
 						ignore = false;
-
-					if (!ignore)
-					{
-						if (i % 2 == 0)
-						{
-							flagCombination = nonioResults[foo][bar][foobar];
-						}
-						else
-						{
-							flagTime = nonioResults[foo][bar][foobar];
-							results.push([flagCombination, flagTime]);
-						}
-					}
-
-					i++;
 				}
 			}
+			else
+			{
+				var errorMessage = nonioResults[foo][bar]["errorMessage"];
+
+				if (errorMessage == undefined)
+				{
+					flagCombination = nonioResults[foo][bar]["compilerSequence"];
+					
+					flagTime = nonioResults[foo][bar]["values"];
+					
+					results.push([flagCombination, flagTime]);
+				}
+			}
+		}
+			
 	}
 
 
-	results = results.sort(function(a, b) {
-		return a[1]-b[1];
+	results = results.sort(function(a, b)
+	{
+		if (a[1]-b[1] == 0)
+			return a[0].length - b[0].length;
+		else
+			return a[1]-b[1];
 	});
 
 	print("----------------------- Top 10 results: -----------------------\n");
@@ -291,7 +301,14 @@ function compileWithBestResult()
 	var args = results[0][0][0].split(" ");
 	main.name = "main";
 
-	var cmaker = new CMaker("binary", false);
+	var binaryName;
+
+	if (mainFile.filename.indexOf('.') != -1)
+		binaryName = mainFile.filename.substring(0, mainFile.filename.indexOf('.'));
+	else
+		binaryName = mainFile.filename;
+
+	var cmaker = new CMaker(binaryName, false);
 	cmaker.addCurrentAst();
 
 	for (var i = 0; i < args.length; i++)
@@ -299,8 +316,8 @@ function compileWithBestResult()
 		cmaker.addCFlags(args[i]);
 	}
 
-	var exe =  cmaker.build("temp", ".");
-	println("Exe: " + exe);
+	var binary =  cmaker.build("temp", ".");
+	print("Compiling with best combination(" + results[0][0][0] + ") to " + binary);
 }
 
 
@@ -348,12 +365,12 @@ function parseFlags($lines)
 				break;
 		}
 
-		var flagName = line.substr(pos, j-2).trim();
+		var flagName = line.substring(pos, j-2).trim();
 
 		if (flagName.search("=") != -1)
 			continue;
 
-		var description = line.substr(j)['replace']("\r", "")['replace'](".", "");
+		var description = line.substring(j)['replace']("\r", "")['replace'](".", "");
 
 		addFlag(flagName, description);
 	}
