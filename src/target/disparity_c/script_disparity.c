@@ -18,15 +18,9 @@ int main(int argc, char* argv[])
     char im1[100], im2[100], timFile[100];
     int WIN_SZ=8, SHIFT=64;
     FILE* fp;
-    
-    if(argc < 2)
-    {
-        printf("We need input image path and output path\n");
-        return -1;
-    }
 
-    sprintf(im1, "%s/1.bmp", argv[1]);
-    sprintf(im2, "%s/2.bmp", argv[1]);
+    sprintf(im1, "%s/1.bmp", "../test_images");
+    sprintf(im2, "%s/2.bmp", "../test_images");
     
     imleft = readImage(im1);
     imright = readImage(im2);

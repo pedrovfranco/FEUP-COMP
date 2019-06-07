@@ -21,29 +21,139 @@ var results;
 var firstFunction;
 var files;
 
+var $inlinne_flags = false; 
+var $loop_flags = false;
+var $math= false;
 aspectdef Resolver
-
-	var $loops = [];
-	select loop end
-	apply
-		$loops.push($loop);
-	end
-	// print($loops.length);
 
 	var executor = new ProcessExecutor();
 	executor.setPrintToConsole(false);
 	executor.execute("g++ --help=optimizers");
+
 
 	parseFlags(executor.getConsoleOutput().split("\n"));
 	categorizeFlags();
 	// printCatFlags();
 
 	call getMain();
+	println("saiu");
+	call Analisys();
 
 	callNonio();
 
+	
+
 end
 
+aspectdef Analisys
+
+	var $loops = [];
+	select loop end
+	apply
+	    $loops.push($loop);
+	end
+	if($loops.length != 0){
+	    $loop_flags = true;
+	}
+	
+	var $functions = [], $statements = [], $names = [], f, s, stmt;
+	select function end
+	apply
+	    $functions.push($function);
+	end
+	if($functions.length > 1){
+	    $inlinne_flags = true;
+	    for (f = 0;f < $functions.length;f++)
+	    {
+	    	stmt = getStatements($functions[f]);
+	    	$statements.push(stmt);
+			$names.push($function.name);
+
+	    }
+	}
+	println($statements);
+	println($names);
+	println($math);
+
+end
+
+// returns number of statements in function
+function getStatements(f){
+	var x, stmts = 0, body=f.body;
+	if(body === undefined){
+		return 0;
+	}
+	for (x = 0;x < f.body.astNumChildren;x++)
+	{   
+	    if (f.body.children[x].joinpointType == "statement")
+	    {
+		if(!isComment(f.body.children[x]))
+		{
+			if(!$math){
+				testMath(f.body.children[x]);
+			}		
+		    stmts++;
+		}   
+	    }
+	    else if(f.body.children[x].joinpointType == "loop")
+	    {
+		stmts = stmts + getStatementsLoop(f.body.children[x]);
+	    }
+	}
+	return stmts;
+	
+}
+
+// returns number of statements in loop
+function getStatementsLoop(l){
+	var x, stmtsaux = 0;
+	if(l === undefined){
+		return 0;
+	}
+	for (x = 0;x < l.astNumChildren;x++)
+	{	
+	    if (l.children[x].joinpointType == "statement")
+	    {
+		if(!isComment(l.children[x]))
+		{	
+			if(!$math){
+				testMath(l.children[x]);
+			}		
+		    stmtsaux++;
+		}   
+	    }
+	    else if (l.children[x].joinpointType == "loop")
+	    {
+		stmtsaux = stmtsaux + getStatementsLoop(l.children[x]);
+	    }
+	    else if (l.children[x].joinpointType == "scope")
+	    {
+		stmtsaux = stmtsaux + getStatementsLoop(l.children[x]);
+	    }
+	}
+	return stmtsaux;
+}
+
+//checks if statement is commentary
+function isComment(s){
+	var strg = s.code, c;
+	for (c = 1; c < strg.length; c++){
+	    if(strg[c] != ' ' && strg[c] != '/'){
+		return false;
+	    }
+	    else if(strg[c] == '/' && strg[c-1] == '/' || strg[c] == '*' && strg[c-1] == '/')
+	    {
+		return true;
+	    }
+	} 
+}
+
+//checks for maths
+function testMath(s){
+	var str = s.code, equal=/=/g, minus=/\-/g, plus=/\+/g, mult=/\*/g, div=/\//g;
+	println(str);
+	$math = equal.test(str) && (minus.test(str) || plus.test(str) || mult.test(str) || div.test(str));
+}
 
 aspectdef getMain
 	
@@ -54,35 +164,36 @@ aspectdef getMain
 
 	files = [];
 	var file, children;
-
 	for (var i = 0; i < root.astNumChildren; i++)
 	{
 		file = root.astChild(i);
 		children = file.astChildren;
 
 		firstFunction = null;
-		for (var i = 0; i < children.length; i++) // Remove local includes and find main
+		for (var f = 0; f < children.length; f++) // Remove local includes and find main
 		{
-			if (children[i].joinpointType === "include")
+			if (children[f].joinpointType === "include")
 			{
-				if (children[i].code.search(/\".*\"/) != -1)
+				if (children[f].code.search(/\".*\"/) != -1)
 				{
-					children[i].detach();
+					children[f].detach();
 				}
 			}
 
-			if (children[i].joinpointType === "function")
+			if (children[f].joinpointType === "function")
 			{
-				if (children[i].name === "main")
+				if (children[f].name === "main")
 				{
-					main = children[i];
+					main = children[f];
 					mainFile = file;
 					print("Got the main!\n");
 				}			
 			}
 
 		}
+
 	}
+
 
 	// Find first function of main file
 	file = mainFile;
@@ -107,6 +218,7 @@ end
 
 function mergeFiles()
 {
+	println("loop1");
 	for (var i = 0; i < root.astNumChildren; i++) // Move includes to main file
 	{
 		var file = root.astChild(i);
@@ -116,16 +228,19 @@ function mergeFiles()
 
 		var children = file.astChildren;
 
-		for (var i = 0; i < children.length; i++)
+		for (var f = 0; f < children.length; f++)
 		{
-			if (children[i].joinpointType === "include")
+			if (children[f].joinpointType === "include")
 			{
-				children[i].detach();
-				firstFunction.insertBefore(children[i].code);
+				children[f].detach();
+				firstFunction.insertBefore(children[f].code);
 			}
 		}
 	}
 
+	println("loop1end");
+
+	println("loop2");
 	for (var i = 0; i < root.astNumChildren; i++) // Move rest of file
 	{
 		var file = root.astChild(i);
@@ -135,10 +250,10 @@ function mergeFiles()
 
 		var children = file.astChildren;
 
-		for (var i = 0; i < children.length; i++)
+		for (var f = 0; f < children.length; f++)
 		{
-			children[i].detach();
-			firstFunction = firstFunction.insertBefore(children[i].code);
+			children[f].detach();
+			firstFunction = firstFunction.insertBefore(children[f].code);
 		}
 
 		file.detach();
@@ -149,6 +264,7 @@ function callNonio()
 {
 	prepareNonioFiles();
 
+	/*
 	var executor = new ProcessExecutor();
 	executor.setPrintToConsole(false);
 	executor.setWorkingDir("../nonio/examples/" + folderName + "/");
@@ -157,7 +273,7 @@ function callNonio()
 
 	getNonioResults();
 
-	compileWithBestResult();
+	compileWithBestResult();*/
 }
 
 function prepareNonioFiles()
@@ -204,17 +320,28 @@ function createArgumentsFile(nsteps, algo)
 
 function createNonioCodeFiles()
 {
-	var file = main.parent;
-
 	main.name = "originalMain";
+
+//	println(main.code);
+
 	var newMain = main.clone("main");
-	var children = newMain.astChild(0).astChildren;
+	var children;
+	println(newMain.astNumChildren);
+	println(newMain.astNumChildren);
+
+	if (newMain.astNumChildren == 1)
+		children = newMain.astChild(0).astChildren;
+	else
+		children = newMain.astChildren;
 
 	for (var i = 0; i < children.length-1; i++)
 	{
 		children[i].detach();
 	}
-	
+	println(children.length);
+
+	println(newMain.code);
+
 	var lastNode = children[children.length-1];
 	lastNode = lastNode.replaceWith("#pragma monitor start");
 	lastNode = lastNode.insertAfter("int ret = originalMain();");
@@ -227,7 +354,7 @@ function createNonioCodeFiles()
 
 	newMain.detach();
 
-	Io.writeFile("../nonio/examples/" + folderName + "/" + folderName + ".c", file.code);
+	Io.writeFile("../nonio/examples/" + folderName + "/" + folderName + ".c", mainFile.code);
 }
 
 function createPassFile()
