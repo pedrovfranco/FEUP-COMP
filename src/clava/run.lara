@@ -23,7 +23,10 @@ var files;
 
 var $inlinne_flags = false; 
 var $loop_flags = false;
-var $math= false;
+var $math = false;
+var $floating = false;
+var $strings = false;
+
 aspectdef Resolver
 
 	var executor = new ProcessExecutor();
@@ -33,10 +36,9 @@ aspectdef Resolver
 
 	parseFlags(executor.getConsoleOutput().split("\n"));
 	categorizeFlags();
-	// printCatFlags();
 
 	call getMain();
-	println("saiu");
+
 	call Analisys();
 
 	callNonio();
@@ -62,18 +64,20 @@ aspectdef Analisys
 	    $functions.push($function);
 	end
 	if($functions.length > 1){
-	    $inlinne_flags = true;
+		$inlinne_flags = true;
+		println($functions.length);
 	    for (f = 0;f < $functions.length;f++)
 	    {
+			print($functions[f].code);
 	    	stmt = getStatements($functions[f]);
 	    	$statements.push(stmt);
-			$names.push($function.name);
-
 	    }
 	}
-	println($statements);
-	println($names);
+	println($inlinne_flags);
+	println($loop_flags);
 	println($math);
+	println($strings);
+	println($floating);
 
 end
 
@@ -89,9 +93,7 @@ function getStatements(f){
 	    {
 		if(!isComment(f.body.children[x]))
 		{
-			if(!$math){
-				testMath(f.body.children[x]);
-			}		
+			tests(f.body.children[x]);
 		    stmts++;
 		}   
 	    }
@@ -116,9 +118,7 @@ function getStatementsLoop(l){
 	    {
 		if(!isComment(l.children[x]))
 		{	
-			if(!$math){
-				testMath(l.children[x]);
-			}		
+			tests(l.children[x]);	
 		    stmtsaux++;
 		}   
 	    }
@@ -148,11 +148,31 @@ function isComment(s){
 	} 
 }
 
+function tests(s){
+	if(!$math)
+		testMath(s);
+	if(!$floating)
+		testFloating(s);
+	if(!$strings)
+		testString(s);
+}
+
 //checks for maths
 function testMath(s){
-	var str = s.code, equal=/=/g, minus=/\-/g, plus=/\+/g, mult=/\*/g, div=/\//g;
-	println(str);
-	$math = equal.test(str) && (minus.test(str) || plus.test(str) || mult.test(str) || div.test(str));
+	var str = s.code, equal=/=/g, minus=/\-/g, plus=/\+/g, mult=/\*/g, div=/\//g, strng=/"(\w)*.(\s)*.(\w)*"/g;
+	$math = equal.test(str) && (minus.test(str) || plus.test(str) || mult.test(str) || div.test(str)) && !strng.test(str);
+}
+
+//checks for maths
+function testFloating(s){
+	var str = s.code, sqrt=/sqrt/g, pow=/pow/g, float=/float/g, double=/double/g, number=/(\d)*\.\d(\d)*/g, div=/\//g, strng=/"(\w)*.(\s)*.(\w)*"/g;
+	floating = sqrt.test(str) || pow.test(str) || float.test(str) || double.test(str) || number.test(str) || (div.test(str) && !strng.test(str));
+}
+
+//checks for maths
+function testString(s){
+	var str = s.code, equal=/=/g, strng=/"(\w)*.(\s)*.(\w)*"/g;
+	$string = equal.test(str) && !strng.test(str);
 }
 
 aspectdef getMain
@@ -218,7 +238,7 @@ end
 
 function mergeFiles()
 {
-	println("loop1");
+
 	for (var i = 0; i < root.astNumChildren; i++) // Move includes to main file
 	{
 		var file = root.astChild(i);
@@ -238,9 +258,6 @@ function mergeFiles()
 		}
 	}
 
-	println("loop1end");
-
-	println("loop2");
 	for (var i = 0; i < root.astNumChildren; i++) // Move rest of file
 	{
 		var file = root.astChild(i);
@@ -326,8 +343,6 @@ function createNonioCodeFiles()
 
 	var newMain = main.clone("main");
 	var children;
-	println(newMain.astNumChildren);
-	println(newMain.astNumChildren);
 
 	if (newMain.astNumChildren == 1)
 		children = newMain.astChild(0).astChildren;
@@ -338,9 +353,7 @@ function createNonioCodeFiles()
 	{
 		children[i].detach();
 	}
-	println(children.length);
 
-	println(newMain.code);
 
 	var lastNode = children[children.length-1];
 	lastNode = lastNode.replaceWith("#pragma monitor start");
