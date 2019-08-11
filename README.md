@@ -1,2 +1,2 @@
 # FEUP-COMP
-Repository for COMP
+FEUP-COMP
